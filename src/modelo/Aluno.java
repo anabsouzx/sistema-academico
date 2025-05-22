@@ -5,9 +5,17 @@ import java.sql.Date;
 public class Aluno {
     private int codigoAluno;
     private String nomeAluno;
-    private java.sql.Date dataNasc;
+    private Date dataNasc;
     private String cpf;
     private String telefone;
+
+    public Aluno(int codigoAluno, String nomeAluno, Date dataNasc, String cpf, String telefone) {
+        this.codigoAluno = codigoAluno;
+        this.nomeAluno = nomeAluno;
+        this.dataNasc = dataNasc;
+        this.cpf = cpf;
+        this.telefone = telefone;
+    }
 
     public int getCodigoAluno() {
         return codigoAluno;
