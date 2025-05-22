@@ -5,4 +5,36 @@ public class Disciplina {
     private String nomeDisciplina;
     private int codCurso;
     private int cargaHoraria;
+
+    public int getCodigoDisciplina() {
+        return codigoDisciplina;
+    }
+
+    public void setCodigoDisciplina(int codigoDisciplina) {
+        this.codigoDisciplina = codigoDisciplina;
+    }
+
+    public String getNomeDisciplina() {
+        return nomeDisciplina;
+    }
+
+    public void setNomeDisciplina(String nomeDisciplina) {
+        this.nomeDisciplina = nomeDisciplina;
+    }
+
+    public int getCodCurso() {
+        return codCurso;
+    }
+
+    public void setCodCurso(int codCurso) {
+        this.codCurso = codCurso;
+    }
+
+    public int getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
 }
