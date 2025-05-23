@@ -9,8 +9,18 @@ public class Aluno {
     private String cpf;
     private String telefone;
 
+    public Aluno(){
+
+    }
+
     public Aluno(int codigoAluno, String nomeAluno, Date dataNasc, String cpf, String telefone) {
         this.codigoAluno = codigoAluno;
+        this.nomeAluno = nomeAluno;
+        this.dataNasc = dataNasc;
+        this.cpf = cpf;
+        this.telefone = telefone;
+    }
+    public Aluno(String nomeAluno, Date dataNasc, String cpf, String telefone) {
         this.nomeAluno = nomeAluno;
         this.dataNasc = dataNasc;
         this.cpf = cpf;
