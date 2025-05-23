@@ -5,6 +5,13 @@ public class Curso {
     private String nomeCurso;
     private int duracao;
 
+
+    public Curso(int codigoCurso, String nomeCurso, int duracao) {
+        this.codigoCurso = codigoCurso;
+        this.nomeCurso = nomeCurso;
+        this.duracao = duracao;
+    }
+
     public int getCodigoCurso() {
         return codigoCurso;
     }
