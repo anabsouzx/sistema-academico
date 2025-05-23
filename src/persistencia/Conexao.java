@@ -28,4 +28,16 @@ public class Conexao {
             throw new RuntimeException(e);
         }
     }
+
+    public Connection getConexao() {
+        return conexao;
+    }
+
+    public void setConexao(Connection conexao) {
+        this.conexao = conexao;
+    }
+
+    public Conexao() {
+        abrirConexao();
+    }
 }
