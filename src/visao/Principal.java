@@ -1,7 +1,5 @@
 package visao;
 
-import persistencia.Conexao;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,30 +20,48 @@ public class Principal extends JFrame{
         setLocationRelativeTo(null); // centralizar na tela
         setVisible(true); // torna visivel
 
-        // açao do botao inserir
+        JMenuBar menuBar = new JMenuBar();
+
+        JMenu menuCadastros = new JMenu("Cadastros");
+        menuBar.add(menuCadastros);
+
+        // Item de Menu para Inserir Aluno
+        JMenuItem itemInserirAluno = new JMenuItem("Novo Aluno...");
+        itemInserirAluno.addActionListener(e -> {
+            abrirJanelaInterna(new TelaInserirAluno()); // Usando um método auxiliar
+        });
+        menuCadastros.add(itemInserirAluno);
+
+        // Item de Menu para Inserir Curso
+        JMenuItem itemInserirCurso = new JMenuItem("Novo Curso...");
+        itemInserirCurso.addActionListener(e -> {
+            abrirJanelaInterna(new TelaInserirCurso()); // Supondo que TelaInserirCurso exista
+        });
+        menuCadastros.add(itemInserirCurso);
+
+        // Item de Menu para Inserir Disciplina
+        JMenuItem itemInserirDisciplina = new JMenuItem("Nova Disciplina...");
+        itemInserirDisciplina.addActionListener(e -> {
+            abrirJanelaInterna(new TelaInserirDisciplina()); // Supondo que TelaInserirDisciplina exista
+        });
+        menuCadastros.add(itemInserirDisciplina);
+
+        // Item de Menu para Inserir Matrícula
+        JMenuItem itemInserirMatricula = new JMenuItem("Nova Matrícula...");
+        itemInserirMatricula.addActionListener(e -> {
+            abrirJanelaInterna(new TelaInserirMatricula()); // Supondo que TelaInserirMatricula exista
+        });
+        menuCadastros.add(itemInserirMatricula);
+
+        setJMenuBar(menuBar);
+
+        // açao do botao inserir aluno
+        // provavelmente vou apagar para priorizar o menu
+        inserirButton.setText("Novo Aluno");
         inserirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaInserir telaInserir = new TelaInserir();
-
-                if(desktop!=null){
-                    desktop.add(telaInserir); // adiciona tela no desktopPane
-                    System.out.println("inserir adicionado no desktop");
-
-                    try {
-                        telaInserir.setSelected(true);
-                    } catch (java.beans.PropertyVetoException ex){
-                        System.err.println("Erro ao selecionar TelaInserir: " + ex.getMessage());
-                        ex.printStackTrace();
-                    }
-
-                    telaInserir.setVisible(true);
-                    System.out.println("telaInserir.setVisible(true) chamado."); // <--- Teste
-                    System.out.println("TelaInserir é visível? " + telaInserir.isVisible()); // <--- Teste
-                    System.out.println("Tamanho de TelaInserir: " + telaInserir.getSize()); // <--- Teste
-                }else{
-                    System.err.println("ERRO: desktopPanePrincipal é nulo!");
-                }
+                abrirJanelaInterna(new TelaInserirAluno());
             }
         });
 
@@ -53,28 +69,29 @@ public class Principal extends JFrame{
         listarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaListar telaListar = new TelaListar();
-
-                if(desktop!=null){
-                    desktop.add(telaListar); // adiciona tela no desktoppane
-                    System.out.println("listar adicionado no desktop");
-
-                    try {
-                        telaListar.setSelected(true);
-                    } catch (java.beans.PropertyVetoException ex){
-                        System.err.println("Erro ao selecionar TelaListar: " + ex.getMessage());
-                        ex.printStackTrace();
-                    }
-
-                    telaListar.setVisible(true);
-                    System.out.println("telaListar.setVisible(true) chamado."); // <--- Teste
-                    System.out.println("TelaListar é visível? " + telaListar.isVisible()); // <--- Teste
-                    System.out.println("Tamanho de TelaListar: " + telaListar.getSize()); // <--- Teste
-                }else{
-                    System.err.println("ERRO: desktopPanePrincipal é nulo!");
-                }
+                abrirJanelaInterna(new TelaListar());
             }
         });
+    }
+
+    // metodo de abrir janela interna
+    private void abrirJanelaInterna(JInternalFrame janela) {
+        if (desktop != null) {
+            desktop.add(janela);
+            System.out.println(janela.getClass().getSimpleName() + " adicionada ao desktop");
+            try {
+                janela.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {
+                System.err.println("Erro ao selecionar " + janela.getClass().getSimpleName() + ": " + ex.getMessage());
+                ex.printStackTrace();
+            }
+            janela.setVisible(true);
+            System.out.println(janela.getClass().getSimpleName() + ".setVisible(true) chamado.");
+            System.out.println(janela.getClass().getSimpleName() + " é visível? " + janela.isVisible());
+            System.out.println("Tamanho de " + janela.getClass().getSimpleName() + ": " + janela.getSize());
+        } else {
+            System.err.println("ERRO: JDesktopPane (desktop) é nulo!");
+        }
     }
 
     // rodar aplicaçao
