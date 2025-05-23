@@ -7,6 +7,14 @@ public class Matricula {
     private int semestre;
     private int ano;
 
+    public Matricula(int numMatricula,int codAluno, int codDisciplina, int semestre, int ano) {
+        this.numMatricula = numMatricula;
+        this.codAluno = codAluno;
+        this.codDisciplina = codDisciplina;
+        this.semestre = semestre;
+        this.ano = ano;
+    }
+
     public int getNumMatricula() {
         return numMatricula;
     }

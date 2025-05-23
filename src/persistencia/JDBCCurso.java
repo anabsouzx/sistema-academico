@@ -28,7 +28,7 @@ public class JDBCCurso {
         }
     }
 
-    public ArrayList<Curso> listarcursos() {
+    public ArrayList<Curso> listarCursos() {
         ArrayList<Curso> cursos = new ArrayList<Curso>();
         String sql = "select * from Curso";
 

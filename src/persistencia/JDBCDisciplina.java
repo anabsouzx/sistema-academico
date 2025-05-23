@@ -29,7 +29,7 @@ public class JDBCDisciplina {
         }
     }
 
-    public ArrayList<Disciplina> listardisciplinas() {
+    public ArrayList<Disciplina> listarDisciplinas() {
         ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
         String sql = "select * from Disciplina";
 
