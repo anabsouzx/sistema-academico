@@ -80,7 +80,7 @@ public class TelaListar extends JInternalFrame{
         atualizarDisciplinasButton.addActionListener(e -> carregarDisciplinas());
         carregarDisciplinas();
 
-        atualizarCursosButton.addActionListener(e -> carregarMatriculas());
+        atualizarMatriculasButton.addActionListener(e -> carregarMatriculas());
         carregarMatriculas();
 
         // carrega automaticamente qnd e clicado
