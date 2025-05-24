@@ -15,7 +15,6 @@ import java.util.List;
 
 public class TelaListar extends JInternalFrame{
     private JTable tabelaItens;
-    private JButton listarDadosButton;
     private JButton apagarButton;
     private JPanel panelLista;
     private JTabbedPane abasPrincipais;
