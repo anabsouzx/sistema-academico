@@ -1,0 +1,70 @@
+/* estilo_menu.css */
+
+/* Cor de fundo principal da aplicação (da cena ou do painel raiz) */
+.root {
+    -fx-background-color: #ECEFF1; /* Um cinza bem claro, quase branco */
+}
+
+/* Estilização da MenuBar */
+.menu-bar {
+    -fx-background-color: #37474F; /* Um cinza escuro/azulado para a barra de menu */
+    -fx-text-fill: white; /* Cor do texto padrão para a barra, embora os menus precisem de estilo específico */
+}
+
+/* Estilização dos cabeçalhos de Menu (ex: "Arquivo", "Gerenciar") na MenuBar */
+.menu-bar .menu .label { /* Alvo: o texto dentro do Menu na MenuBar */
+    -fx-text-fill: #FFFFFF; /* Texto branco para os menus */
+}
+
+/* Estilização do MenuButton (que é como o Menu se comporta na MenuBar) ao passar o mouse ou quando aberto */
+.menu-bar .menu-button:hover,
+.menu-bar .menu-button:focused,
+.menu-bar .menu-button:showing {
+    -fx-background-color: #546E7A; /* Um tom de cinza/azul um pouco mais claro para destaque */
+}
+.menu-bar .menu-button:showing .label { /* Para garantir que o texto permaneça visível quando o menu está aberto */
+    -fx-text-fill: #FFFFFF;
+}
+
+
+/* Estilização do fundo do painel dropdown do Menu (que é um ContextMenu) */
+.context-menu {
+    -fx-background-color: #CFD8DC; /* Um cinza claro para o fundo do dropdown */
+    -fx-border-color: #B0BEC5; /* Uma borda sutil */
+    -fx-border-width: 1px;
+}
+
+/* Estilização dos MenuItems (itens dentro do dropdown) */
+.menu-item {
+    -fx-background-color: transparent; /* Fundo padrão transparente dentro do context-menu */
+    -fx-padding: 5px 20px; /* Espaçamento interno */
+}
+
+.menu-item .label { /* Alvo: o texto dentro do MenuItem */
+    -fx-text-fill: #263238; /* Texto escuro para os itens do menu */
+}
+
+/* Estilização do MenuItem ao passar o mouse (hover) ou quando está focado */
+.menu-item:focused,
+.menu-item:hover {
+    -fx-background-color: #78909C; /* Um cinza/azul médio para o item selecionado/hover */
+}
+
+.menu-item:focused .label,
+.menu-item:hover .label {
+    -fx-text-fill: #FFFFFF; /* Texto branco para o item selecionado/hover */
+}
+
+/* Estilização da seta do Menu, se houver (geralmente para menus com submenus) */
+.menu .right-arrow, .menu-item .right-arrow {
+    -fx-background-color: #263238; /* Cor da seta (se visível) */
+}
+.menu-item:focused .right-arrow, .menu-item:hover .right-arrow {
+    -fx-background-color: white;
+}
+
+/* Separador dentro do menu */
+.separator .line {
+    -fx-border-color: #B0BEC5; /* Cor da linha do separador */
+    -fx-border-insets: 0;
+}
