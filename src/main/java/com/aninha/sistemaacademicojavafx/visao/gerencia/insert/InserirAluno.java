@@ -5,6 +5,7 @@ import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import java.text.ParseException;
@@ -32,8 +33,12 @@ public class InserirAluno {
         String tel = txtTel.getText();
 
         if(nome.isEmpty() || data.isEmpty() || cpf.isEmpty() || tel.isEmpty()){
-            System.out.println("mensagem de erro aqui");
-            // adicionar msg de erro pq to com preguiça
+            Alert vazio = new Alert(Alert.AlertType.WARNING);
+            vazio.setTitle("Conteúdo vazio");
+            vazio.setHeaderText("Todos os campos precisam ser preenchidos");
+            vazio.setContentText("Certifique-se que blablabla");
+            vazio.show();
+            // escrever mensagem de erro bonitinho nao aguento mais
             return;
         }
 
@@ -47,7 +52,11 @@ public class InserirAluno {
             java.util.Date utilDate = sdf.parse(data);
             dataSql = new java.sql.Date(utilDate.getTime());
         }catch (ParseException e){
-            System.out.println("ei man");
+            Alert dataA = new Alert(Alert.AlertType.ERROR);
+            dataA.setTitle("Data Incorreta");
+            dataA.setHeaderText("O campo data não foi preenchido corretamente");
+            dataA.setContentText("Formato correto:dd/MM/yyyy");
+            dataA.show();
             txtData.requestFocus();
             return;
         }
