@@ -20,12 +20,6 @@ public class Aluno {
         this.cpf = cpf;
         this.telefone = telefone;
     }
-    public Aluno(String nomeAluno, Date dataNasc, String cpf, String telefone) {
-        this.nomeAluno = nomeAluno;
-        this.dataNasc = dataNasc;
-        this.cpf = cpf;
-        this.telefone = telefone;
-    }
 
     public int getCodigoAluno() {
         return codigoAluno;
@@ -65,5 +59,10 @@ public class Aluno {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    @Override
+    public String toString() {
+        return nomeAluno + "(ID: " + codigoAluno+")";
     }
 }

@@ -1,6 +1,9 @@
 package com.aninha.sistemaacademicojavafx.modelo.persistencia;
 
+import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -66,5 +69,25 @@ public class DAODisciplina {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public ObservableList<Disciplina> listarDisciplinasComboBox() {
+        ObservableList<Disciplina> disciplinas = FXCollections.observableArrayList();
+        String sql = "SELECT codigoDisciplina, nomeDisciplina, codCurso, cargaHoraria FROM Disciplina ORDER BY NomeDisciplina"; // Ordenar por nome ajuda na seleção
+        try (Statement declaracao = conexao.createStatement();
+             ResultSet resposta = declaracao.executeQuery(sql)) {
+
+            while (resposta.next()) {
+                int codigo = resposta.getInt("codigoDisciplina");
+                String nome = resposta.getString("nomeDisciplina");
+                int codigoC = resposta.getInt("codCurso");
+                int cargaHoraria = resposta.getInt("cargaHoraria");
+                disciplinas.add(new Disciplina(codigo, nome, codigoC, cargaHoraria)); // Supondo que você tem um construtor completo
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Trate a exceção de forma adequada
+        }
+        return disciplinas;
     }
 }

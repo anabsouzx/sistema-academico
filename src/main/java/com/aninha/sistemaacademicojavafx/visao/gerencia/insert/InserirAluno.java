@@ -25,6 +25,7 @@ public class InserirAluno {
 
     @FXML
     void insereAluno(ActionEvent event) {
+        int codigo = 0;
         String nome = txtNomeA.getText();
         String data = txtData.getText();
         String cpf = txtCpf.getText();
@@ -32,6 +33,7 @@ public class InserirAluno {
 
         if(nome.isEmpty() || data.isEmpty() || cpf.isEmpty() || tel.isEmpty()){
             System.out.println("mensagem de erro aqui");
+            // adicionar msg de erro pq to com preguiça
             return;
         }
 
@@ -51,7 +53,7 @@ public class InserirAluno {
         }
 
         // inserir na tabela
-        Aluno aluno = new Aluno(nome,dataSql,cpf,tel);
+        Aluno aluno = new Aluno(codigo,nome,dataSql,cpf,tel);
 
         Conexao conexao = null;
         try{

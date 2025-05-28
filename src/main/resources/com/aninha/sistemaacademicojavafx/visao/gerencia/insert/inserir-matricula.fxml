@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -16,9 +17,9 @@
                         <Insets />
                     </VBox.margin>
                 </Label>
-                <TextField fx:id="txtCodA" prefHeight="25.0" prefWidth="590.0" promptText="1" />
+            <ComboBox fx:id="comboBoxAluno" prefWidth="150.0" />
                 <Label text="Código da Disciplina" />
-                <TextField fx:id="txtCodD" promptText="2" />
+            <ComboBox fx:id="comboBoxDisc" prefWidth="150.0" />
                 <Label text="Semestre" />
                 <TextField fx:id="txtSemestre" promptText="2" />
                 <Label text="Ano" />

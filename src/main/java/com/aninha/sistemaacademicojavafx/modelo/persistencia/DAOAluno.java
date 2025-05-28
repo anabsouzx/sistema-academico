@@ -58,6 +58,27 @@ public class DAOAluno {
         return alunos;
     }
 
+    public ObservableList<Aluno> listarTodosAlunosParaComboBox() {
+        ObservableList<Aluno> alunos = FXCollections.observableArrayList();
+        String sql = "SELECT CodigoAluno, NomeAluno, DataNasc, CPF, Telefone FROM Aluno ORDER BY NomeAluno"; // Ordenar por nome ajuda na seleção
+        try (Statement declaracao = conexao.createStatement();
+             ResultSet resposta = declaracao.executeQuery(sql)) {
+
+            while (resposta.next()) {
+                int codigo = resposta.getInt("CodigoAluno");
+                String nome = resposta.getString("NomeAluno");
+                Date dataNasc = resposta.getDate("DataNasc");
+                String cpf = resposta.getString("CPF");
+                String telefone = resposta.getString("Telefone");
+                alunos.add(new Aluno(codigo, nome, dataNasc, cpf, telefone)); // Supondo que você tem um construtor completo
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Trate a exceção de forma adequada
+        }
+        return alunos;
+    }
+
     public void apagarTudo(){
         String sql = "delete from aluno";
 

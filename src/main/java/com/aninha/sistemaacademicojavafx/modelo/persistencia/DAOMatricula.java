@@ -25,7 +25,7 @@ public class DAOMatricula {
             ps.setInt(2, m.getCodAluno());
             ps.setInt(3, m.getCodDisciplina());
             ps.setInt(4, m.getSemestre());
-            ps.setInt(4, m.getAno());
+            ps.setInt(5, m.getAno());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
