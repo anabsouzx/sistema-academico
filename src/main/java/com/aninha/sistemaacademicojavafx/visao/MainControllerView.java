@@ -29,7 +29,7 @@ public class MainControllerView {
 
     @FXML
     void gerenciarAlunos(ActionEvent event) throws IOException {
-        carregarTela("gerenciar-alunos.fxml");
+        carregarTela("gerencia/gerenciar-alunos.fxml");
     }
 
     @FXML

@@ -10,5 +10,8 @@ module com.aninha.sistemaacademicojavafx {
     opens com.aninha.sistemaacademicojavafx to javafx.fxml;
     opens com.aninha.sistemaacademicojavafx.visao to javafx.fxml;
     opens com.aninha.sistemaacademicojavafx.modelo to javafx.base, javafx.fxml;
+
     exports com.aninha.sistemaacademicojavafx;
+    opens com.aninha.sistemaacademicojavafx.visao.gerencia to javafx.fxml;
+    opens com.aninha.sistemaacademicojavafx.visao.gerencia.insert to javafx.fxml;
 }
