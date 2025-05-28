@@ -1,6 +1,9 @@
 package com.aninha.sistemaacademicojavafx.modelo.persistencia;
 
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
+import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -64,5 +67,24 @@ public class DAOCurso {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public ObservableList<Curso> listarCursosComboBox() {
+        ObservableList<Curso> cursos = FXCollections.observableArrayList();
+        String sql = "SELECT codigoCurso, nomeCurso, duracao FROM Curso ORDER BY nomeCurso"; // Ordenar por nome ajuda na seleção
+        try (Statement declaracao = conexao.createStatement();
+             ResultSet resposta = declaracao.executeQuery(sql)) {
+
+            while (resposta.next()) {
+                int codigo = resposta.getInt("codigoCurso");
+                String nome = resposta.getString("nomeCurso");
+                int duracao = resposta.getInt("duracao");
+                cursos.add(new Curso(codigo, nome, duracao)); // Supondo que você tem um construtor completo
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Trate a exceção de forma adequada
+        }
+        return cursos;
     }
 }
