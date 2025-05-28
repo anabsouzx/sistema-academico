@@ -32,8 +32,8 @@ public class DAODisciplina {
         }
     }
 
-    public ArrayList<Disciplina> listarDisciplinas() {
-        ArrayList<Disciplina> disciplinas = new ArrayList<Disciplina>();
+    public ObservableList<Disciplina> listarDisciplinas() {
+        ObservableList<Disciplina> disciplinas = FXCollections.observableArrayList();
         String sql = "select * from Disciplina";
 
         try {
