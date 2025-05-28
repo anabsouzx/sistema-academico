@@ -1,6 +1,8 @@
 package com.aninha.sistemaacademicojavafx.modelo.persistencia;
 
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,8 +32,8 @@ public class DAOMatricula {
         }
     }
 
-    public ArrayList<Matricula> listarMatriculas() {
-        ArrayList<Matricula> matriculas = new ArrayList<Matricula>();
+    public ObservableList<Matricula> listarMatriculas() {
+        ObservableList<Matricula> matriculas = FXCollections.observableArrayList();
         String sql = "select * from Matricula";
 
         try {

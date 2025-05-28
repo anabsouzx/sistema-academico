@@ -33,18 +33,18 @@ public class MainControllerView {
     }
 
     @FXML
-    void gerenciarCursos(ActionEvent event) {
-
+    void gerenciarCursos(ActionEvent event) throws IOException {
+        carregarTela("gerencia/gerenciar-cursos.fxml");
     }
 
     @FXML
-    void gerenciarDisciplinas(ActionEvent event) {
-
+    void gerenciarDisciplinas(ActionEvent event) throws IOException {
+        carregarTela("gerencia/gerenciar-disciplinas.fxml");
     }
 
     @FXML
-    void gerenciarMatriculas(ActionEvent event) {
-
+    void gerenciarMatriculas(ActionEvent event) throws IOException {
+        carregarTela("gerencia/gerenciar-matriculas.fxml");
     }
 
     private void carregarTela(String fxmlFile) throws IOException {
