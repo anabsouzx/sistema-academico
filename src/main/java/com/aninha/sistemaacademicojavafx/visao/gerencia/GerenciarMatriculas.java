@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -48,7 +49,13 @@ public class GerenciarMatriculas implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numMatricula"));
+        colunaCodA.setCellValueFactory(new PropertyValueFactory<>("codAluno"));
+        colunaCodDisc.setCellValueFactory(new PropertyValueFactory<>("codDisciplina"));
+        colunaSemestre.setCellValueFactory(new PropertyValueFactory<>("semestre"));
+        colunaAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
 
+        carregarDados();
     }
 
     private void carregarDados() {
