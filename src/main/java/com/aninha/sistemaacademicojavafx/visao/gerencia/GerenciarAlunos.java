@@ -1,4 +1,4 @@
-package com.aninha.sistemaacademicojavafx.visao;
+package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
@@ -6,16 +6,24 @@ import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class GerenciarAlunos implements Initializable {
+
+    @FXML
+    private BorderPane painelPrincipal;
+
     @FXML
     private TableColumn<Aluno, Integer> colunaCodigoA;
 
@@ -45,8 +53,8 @@ public class GerenciarAlunos implements Initializable {
     }
 
     @FXML
-    void inserirAluno(ActionEvent event) {
-
+    void inserirAluno(ActionEvent event) throws IOException {
+        carregarTela("insert/inserir-aluno.fxml");
     }
 
     @Override
@@ -67,5 +75,11 @@ public class GerenciarAlunos implements Initializable {
 
         ObservableList<Aluno> listaDeUsuarios = daoAluno.listarAlunos();
         tableAlunos.setItems(listaDeUsuarios);
+    }
+
+    private void carregarTela(String fxmlFile) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent contentDaTela = fxmlLoader.load();
+        painelPrincipal.setCenter(contentDaTela);
     }
 }
