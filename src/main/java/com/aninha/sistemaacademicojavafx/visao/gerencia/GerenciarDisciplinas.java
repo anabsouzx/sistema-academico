@@ -67,7 +67,7 @@ public class GerenciarDisciplinas implements Initializable {
 
     private void carregarTela(String fxmlFile) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Parent contentDaTela = fxmlLoader.load();
-        painelPrincipal.setCenter(contentDaTela);
+        Parent conteudoDaTela = fxmlLoader.load();
+        painelPrincipal.setCenter(conteudoDaTela);
     }
 }
