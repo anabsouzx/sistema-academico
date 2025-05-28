@@ -1,7 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.insert;
 
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
-import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.*;
