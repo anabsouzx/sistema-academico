@@ -68,7 +68,7 @@ public class GerenciarCursos implements Initializable {
         c = new Conexao();
         DAOCurso daoCurso = new DAOCurso(c.getConexao());
 
-        ObservableList<Curso> listaDeCursos = (ObservableList<Curso>) daoCurso.listarCursos();
+        ObservableList<Curso> listaDeCursos = daoCurso.listarCursos();
         tableCurso.setItems(listaDeCursos);
     }
 

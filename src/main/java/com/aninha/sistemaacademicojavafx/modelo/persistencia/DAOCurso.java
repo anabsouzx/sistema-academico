@@ -3,7 +3,8 @@ package com.aninha.sistemaacademicojavafx.modelo.persistencia;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
 
 import java.sql.*;
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class DAOCurso {
 
@@ -14,11 +15,9 @@ public class DAOCurso {
     }
 
     public void inserirCurso(Curso c) {
-        String sql = "insert into Curso(codigoCurso, nomeCurso, duracao) values( ?, ?, ?)";
-        PreparedStatement ps;
-
+        String sql = "INSERT INTO Curso(codigoCurso, nomeCurso, duracao) VALUES (?, ?, ?)";
         try {
-            ps = this.conexao.prepareStatement(sql);
+            PreparedStatement ps = this.conexao.prepareStatement(sql);
             ps.setInt(1, c.getCodigoCurso());
             ps.setString(2, c.getNomeCurso());
             ps.setInt(3, c.getDuracao());
@@ -28,40 +27,35 @@ public class DAOCurso {
         }
     }
 
-    public ArrayList<Curso> listarCursos() {
-        ArrayList<Curso> cursos = new ArrayList<Curso>();
-        String sql = "select * from Curso";
+    public ObservableList<Curso> listarCursos() {
+        ObservableList<Curso> cursos = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Curso";
 
         try {
-            Statement declaração = conexao.createStatement();
-            ResultSet resposta = declaração.executeQuery(sql);
+            Statement stmt = conexao.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 
-            while (resposta.next()) {
-                int codigoCurso = resposta.getInt("codigoCurso");
-                String nomeCurso = resposta.getString("nomeCurso");
-                int duracao = resposta.getInt("duracao");
+            while (rs.next()) {
+                int codigoCurso = rs.getInt("codigoCurso");
+                String nomeCurso = rs.getString("nomeCurso");
+                int duracao = rs.getInt("duracao");
 
                 Curso c = new Curso(codigoCurso, nomeCurso, duracao);
                 cursos.add(c);
             }
-
-
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         return cursos;
     }
 
     public void apagarTudo() {
-        String sql = "delete from Curso";
-
-        PreparedStatement ps;
+        String sql = "DELETE FROM Curso";
         try {
-            ps = this.conexao.prepareStatement(sql);
+            PreparedStatement ps = this.conexao.prepareStatement(sql);
             ps.execute();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
