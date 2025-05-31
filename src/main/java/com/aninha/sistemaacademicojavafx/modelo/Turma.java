@@ -2,11 +2,7 @@ package com.aninha.sistemaacademicojavafx.modelo;
 
 import java.util.ArrayList;
 
-/**
- * Representa uma turma no sistema acadêmico.
- * Cada turma possui um código, uma disciplina associada,
- * um professor responsável e uma lista de alunos matriculados.
- */
+
 public class Turma {
     private int codigoTurma;
     private int codigoProfessor;
