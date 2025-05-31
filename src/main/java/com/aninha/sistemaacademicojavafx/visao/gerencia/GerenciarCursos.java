@@ -1,9 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOCurso;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +15,6 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class GerenciarCursos implements Initializable {
@@ -64,12 +60,7 @@ public class GerenciarCursos implements Initializable {
     }
 
     private void carregarDados() {
-        Conexao c = null;
-        c = new Conexao();
-        DAOCurso daoCurso = new DAOCurso(c.getConexao());
 
-        ObservableList<Curso> listaDeCursos = daoCurso.listarCursos();
-        tableCurso.setItems(listaDeCursos);
     }
 
     private void carregarTela(String fxmlFile) throws IOException {

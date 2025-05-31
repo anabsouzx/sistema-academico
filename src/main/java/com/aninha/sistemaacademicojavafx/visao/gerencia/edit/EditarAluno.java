@@ -1,14 +1,11 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarAlunos; // Para poder chamar um método de recarregar
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane; // Para fechar a tela de edição
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

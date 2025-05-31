@@ -47,6 +47,16 @@ public class MainControllerView {
         carregarTela("gerencia/gerenciar-matriculas.fxml");
     }
 
+    @FXML
+    void gerenciarProfs(ActionEvent event) throws IOException {
+        carregarTela("gerencia/gerenciar-matriculas.fxml");
+    }
+
+    @FXML
+    void gerenciarTurmas(ActionEvent event) throws IOException {
+        carregarTela("gerencia/gerenciar-turmas.fxml");
+    }
+
     private void carregarTela(String fxmlFile) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent conteudoDaTela = fxmlLoader.load();

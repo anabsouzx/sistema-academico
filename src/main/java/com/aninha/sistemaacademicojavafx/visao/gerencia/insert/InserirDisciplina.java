@@ -54,35 +54,13 @@ public class InserirDisciplina implements Initializable {
         }
 
         // adicionar na tabela socorro
-        Disciplina disciplina = new Disciplina(codigo,nome,codCurso,cargaH);
-        Conexao conexao = null;
-
-        try{
-            conexao = new Conexao();
-            DAODisciplina daoDisciplina = new DAODisciplina(conexao.getConexao());
-
-            daoDisciplina.inserirDisciplina(disciplina);
-
-            comboBoxCurso.getSelectionModel().clearSelection();
-            txtCargaH.setText("");
-            txtNomeD.setText("");
-            txtNomeD.requestFocus();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            if(conexao!=null){
-                conexao.fecharConexao();
-            }
-        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Conexao c = new Conexao();
-        daoCurso = new DAOCurso(c.getConexao());
-        daoDisciplina = new DAODisciplina(c.getConexao());
 
-        popularComboBoxCurso();
+
+        //popularComboBoxCurso();
     }
 
     private void popularComboBoxCurso() {

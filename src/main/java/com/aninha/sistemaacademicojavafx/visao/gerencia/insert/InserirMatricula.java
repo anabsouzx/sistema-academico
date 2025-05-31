@@ -63,26 +63,9 @@ public class InserirMatricula implements Initializable {
 
         // adicionando dados a tabela blabllabla
         Matricula matricula = new Matricula(num,codAluno,codDisc,smt,ano);
-        Conexao conexao = null;
+        //Conexao conexao = null;
 
-        try{
-            conexao = new Conexao();
-            DAOMatricula daoMatricula = new DAOMatricula(conexao.getConexao());
 
-            daoMatricula.inserirMatricula(matricula);
-
-            comboBoxAluno.getSelectionModel().clearSelection();
-            comboBoxDisc.getSelectionModel().clearSelection();
-            txtAno.setText("");
-            txtSemestre.setText("");
-            comboBoxAluno.requestFocus();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(conexao!=null){
-                conexao.fecharConexao();
-            }
-        }
     }
 
     @Override

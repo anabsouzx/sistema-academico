@@ -1,9 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOMatricula;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,12 +56,7 @@ public class GerenciarMatriculas implements Initializable {
     }
 
     private void carregarDados() {
-        Conexao c = null;
-        c = new Conexao();
-        DAOMatricula daoMatricula = new DAOMatricula(c.getConexao());
 
-        ObservableList<Matricula> listaMatriculas = daoMatricula.listarMatriculas();
-        tableMatriculas.setItems(listaMatriculas);
     }
 
     private void carregarTela(String fxmlFile) throws IOException {

@@ -1,7 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.insert;
 
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOCurso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,23 +40,6 @@ public class InserirCurso {
         }
 
         // adiçao na tabela mysql
-        Curso curso = new Curso(codigo,nome,duracao);
-        Conexao conexao = null;
 
-        try{
-            conexao = new Conexao();
-            DAOCurso daoCurso = new DAOCurso(conexao.getConexao());
-
-            daoCurso.inserirCurso(curso);
-
-            txtNomeC.setText("");
-            txtDuracao.setText("");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if(conexao!=null){
-                conexao.fecharConexao();
-            }
-        }
     }
 }

@@ -1,12 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
-import com.aninha.sistemaacademicojavafx.modelo.Matricula;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAODisciplina;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOMatricula;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,12 +52,7 @@ public class GerenciarDisciplinas implements Initializable {
     }
 
     private void carregarDados() {
-        Conexao c = null;
-        c = new Conexao();
-        DAODisciplina daoDisciplina = new DAODisciplina(c.getConexao());
 
-        ObservableList<Disciplina> listaDisciplinas = daoDisciplina.listarDisciplinas();
-        tableDisciplinas.setItems(listaDisciplinas);
     }
 
     private void carregarTela(String fxmlFile) throws IOException {

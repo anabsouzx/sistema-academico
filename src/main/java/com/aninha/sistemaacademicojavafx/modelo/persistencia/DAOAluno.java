@@ -4,8 +4,6 @@ import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.List;
-
 public class DAOAluno {
     private static ObservableList<Aluno> alunos = FXCollections.observableArrayList();
     private static int proximoCodigoAluno = 1;

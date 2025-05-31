@@ -22,6 +22,8 @@
                   <MenuItem mnemonicParsing="false" onAction="#gerenciarCursos" text="Curso" />
                   <MenuItem mnemonicParsing="false" onAction="#gerenciarDisciplinas" text="Disciplina" />
                   <MenuItem mnemonicParsing="false" onAction="#gerenciarMatriculas" text="Matricula" />
+                <MenuItem mnemonicParsing="false" onAction="#gerenciarProfs" text="Professor" />
+                <MenuItem mnemonicParsing="false" onAction="#gerenciarTurmas" text="Turma" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
