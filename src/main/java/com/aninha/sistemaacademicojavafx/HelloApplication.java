@@ -1,5 +1,6 @@
 package com.aninha.sistemaacademicojavafx;
 
+import com.aninha.sistemaacademicojavafx.modelo.Professor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

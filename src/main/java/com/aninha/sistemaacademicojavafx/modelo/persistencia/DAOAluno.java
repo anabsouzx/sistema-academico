@@ -49,8 +49,8 @@ public class DAOAluno {
                 String cpf = resposta.getString("cpf");
                 String telefone = resposta.getString("telefone");
 
-                Aluno a = new Aluno(codigoAluno, nomeAluno, dataNasc, cpf, telefone);
-                alunos.add(a);
+                //Aluno a = new Aluno(codigoAluno, nomeAluno, dataNasc, cpf, telefone);
+                //alunos.add(a);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class DAOAluno {
                 Date dataNasc = resposta.getDate("DataNasc");
                 String cpf = resposta.getString("CPF");
                 String telefone = resposta.getString("Telefone");
-                alunos.add(new Aluno(codigo, nome, dataNasc, cpf, telefone));
+                //alunos.add(new Aluno(codigo, nome, dataNasc, cpf, telefone));
             }
         } catch (SQLException e) {
             e.printStackTrace();
