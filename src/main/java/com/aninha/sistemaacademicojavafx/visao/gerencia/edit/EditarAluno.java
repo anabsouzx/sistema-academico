@@ -33,7 +33,7 @@ public class EditarAluno {
     }
 
     private void popularCampos() {
-        if (alunoParaEditar != null) {
+        /*if (alunoParaEditar != null) {
             txtNomeA.setText(alunoParaEditar.getNomeAluno());
             // formatar a data para exibição dd/MM/yyyy
             if (alunoParaEditar.getDataNasc() != null) {
@@ -42,7 +42,7 @@ public class EditarAluno {
             }
             txtCpf.setText(alunoParaEditar.getCpf());
             txtTel.setText(alunoParaEditar.getTelefone());
-        }
+        }*/
     }
 
     @FXML
@@ -69,12 +69,12 @@ public class EditarAluno {
             return;
         }
 
-        alunoParaEditar.setNomeAluno(nome);
-        alunoParaEditar.setDataNasc(dataSql);
-        alunoParaEditar.setCpf(cpf);
-        alunoParaEditar.setTelefone(tel);
+        //alunoParaEditar.setNomeAluno(nome);
+        //alunoParaEditar.setDataNasc(dataSql);
+        //alunoParaEditar.setCpf(cpf);
+        //alunoParaEditar.setTelefone(tel);
 
-        Conexao conexao = null;
+        /*Conexao conexao = null;
         try {
             conexao = new Conexao();
             DAOAluno daoAluno = new DAOAluno(conexao.getConexao());
@@ -94,7 +94,7 @@ public class EditarAluno {
             if (conexao != null) {
                 conexao.fecharConexao();
             }
-        }
+        }*/
     }
 
     @FXML

@@ -87,17 +87,17 @@ public class InserirMatricula implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Conexao c = new Conexao();
+        /*Conexao c = new Conexao();
         daoAluno = new DAOAluno(c.getConexao());
         daoMatricula = new DAOMatricula(c.getConexao());
         daoDisciplina = new DAODisciplina(c.getConexao());
 
         popularComboBoxAlunos();
-        popularComboBoxDisc();
+        popularComboBoxDisc();*/
     }
 
     private void popularComboBoxAlunos() {
-        ObservableList<Aluno> alunos = daoAluno.listarTodosAlunosParaComboBox();
+        /*ObservableList<Aluno> alunos = daoAluno.listarTodosAlunosParaComboBox();
         comboBoxAluno.setItems(alunos);
 
         // Configurar como o objeto Aluno é exibido no ComboBox

@@ -3,6 +3,7 @@ package com.aninha.sistemaacademicojavafx.modelo;
 import java.util.Date;
 
 public abstract class Pessoa {
+    int codigo;
     String nome;
     Date dataDeNascimento;
     String cpf;

@@ -1,8 +1,8 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.insert;
 
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
+import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarAlunos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class InserirAluno {
     @FXML
@@ -24,9 +25,14 @@ public class InserirAluno {
     @FXML
     private TextField txtTel;
 
+    DAOAluno daoAluno = new DAOAluno();
+
+    public InserirAluno(){
+        this.daoAluno = new DAOAluno();
+    }
+
     @FXML
     void insereAluno(ActionEvent event) {
-        int codigo = 0;
         String nome = txtNomeA.getText();
         String data = txtData.getText();
         String cpf = txtCpf.getText();
@@ -43,44 +49,54 @@ public class InserirAluno {
         }
 
         // converter data
-        java.sql.Date dataSql = null;
+        Date dataD = null;
         String formato = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(formato);
         sdf.setLenient(false);
 
-        try{
-            java.util.Date utilDate = sdf.parse(data);
-            dataSql = new java.sql.Date(utilDate.getTime());
-        }catch (ParseException e){
+        try {
+            dataD = sdf.parse(data);
+        } catch (ParseException e) {
             Alert dataA = new Alert(Alert.AlertType.ERROR);
             dataA.setTitle("Data Incorreta");
             dataA.setHeaderText("O campo data não foi preenchido corretamente");
-            dataA.setContentText("Formato correto:dd/MM/yyyy");
-            dataA.show();
+            dataA.setContentText("Formato correto: dd/MM/yyyy. Ex: 25/12/2000");
+            dataA.showAndWait();
             txtData.requestFocus();
             return;
         }
 
-        // inserir na tabela
-        Aluno aluno = new Aluno(codigo,nome,dataSql,cpf,tel);
+        // criar aluno
+        Aluno aluno = new Aluno(nome, dataD, cpf, tel);
 
-        Conexao conexao = null;
-        try{
-            conexao = new Conexao();
-            DAOAluno daoAluno = new DAOAluno(conexao.getConexao());
+        // add na lista
+        try {
+            daoAluno.adicionar(aluno); // O DAO agora lida com a lista
 
-            daoAluno.inserirAluno(aluno);
+            // Feedback para o utilizador
+            Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+            sucesso.setTitle("Sucesso");
+            sucesso.setHeaderText("Aluno inserido");
+            sucesso.setContentText("O aluno " + nome + " foi inserido com sucesso!");
+            sucesso.showAndWait();
 
             txtNomeA.setText("");
             txtData.setText("");
             txtCpf.setText("");
             txtTel.setText("");
+            txtNomeA.requestFocus(); // Foco no primeiro campo para nova inserção
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if(conexao!=null){
-                conexao.fecharConexao();
-            }
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("Erro");
+            erro.setHeaderText("Erro ao inserir aluno");
+            erro.setContentText("Ocorreu um erro inesperado: " + e.getMessage());
+            erro.showAndWait();
         }
+
+        txtNomeA.clear();
+        txtData.clear();
+        txtCpf.clear();
+        txtTel.clear();
     }
 }

@@ -4,18 +4,22 @@ import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.Conexao;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarAluno;
+import com.aninha.sistemaacademicojavafx.visao.gerencia.insert.InserirAluno;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +50,12 @@ public class GerenciarAlunos implements Initializable {
     @FXML
     private TableView<Aluno> tableAlunos;
 
+    private DAOAluno daoAluno;
+
+    public GerenciarAlunos() {
+        this.daoAluno = new DAOAluno(); // Instancia o DAO
+    }
+
     @FXML
     void editarAluno(ActionEvent event) throws IOException {
         Aluno alunoSelecionado = tableAlunos.getSelectionModel().getSelectedItem();
@@ -71,43 +81,7 @@ public class GerenciarAlunos implements Initializable {
 
     @FXML
     void excluirAluno(ActionEvent event) throws IOException{
-        System.out.println("exclusao");
-        Aluno alunoSelecionado = tableAlunos.getSelectionModel().getSelectedItem();
 
-        if (alunoSelecionado == null) { // alerta caso nao seja selecionado um aluno
-            mostrarAlerta("Seleção Necessária", "Por favor, selecione um aluno para excluir.", Alert.AlertType.WARNING);
-            return;
-        }
-
-        // prevençao de erros
-        Alert confirmacao = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacao.setTitle("Confirmar Exclusão");
-        confirmacao.setHeaderText("Excluir Aluno: " + alunoSelecionado.getNomeAluno());
-        confirmacao.setContentText("Tem certeza que deseja excluir este aluno permanentemente?");
-
-        Optional<ButtonType> resultado = confirmacao.showAndWait();
-
-        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            Conexao c = null;
-            try {
-                c = new Conexao();
-                DAOAluno daoAluno = new DAOAluno(c.getConexao());
-                if (daoAluno.excluirAluno(alunoSelecionado.getCodigoAluno())) {
-                    mostrarAlerta("Sucesso", "Aluno excluído com sucesso!", Alert.AlertType.INFORMATION);
-                    carregarDados(); // Atualiza a tabela
-                } else {
-                    // O DAOAluno já pode ter mostrado um alerta mais específico
-                    // mostrarAlerta("Erro", "Não foi possível excluir o aluno.", Alert.AlertType.ERROR);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                mostrarAlerta("Erro Crítico", "Ocorreu um erro inesperado ao tentar excluir.", Alert.AlertType.ERROR);
-            } finally {
-                if (c != null) {
-                    c.fecharConexao();
-                }
-            }
-        }
     }
 
     @FXML
@@ -118,8 +92,8 @@ public class GerenciarAlunos implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colunaCodigoA.setCellValueFactory(new PropertyValueFactory<>("codigoAluno"));
-        colunaNomeA.setCellValueFactory(new PropertyValueFactory<>("nomeAluno"));
-        colunaData.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
+        colunaNomeA.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colunaData.setCellValueFactory(new PropertyValueFactory<>("dataDeNascimento"));
         colunaCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         colunaTel.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
@@ -127,12 +101,9 @@ public class GerenciarAlunos implements Initializable {
     }
 
     public void carregarDados() {
-        Conexao c = null;
-        c = new Conexao();
-        DAOAluno daoAluno = new DAOAluno(c.getConexao());
-
-        ObservableList<Aluno> listaDeUsuarios = daoAluno.listarAlunos();
-        tableAlunos.setItems(listaDeUsuarios);
+        ObservableList<Aluno> listaDeAlunos = daoAluno.listarAlunos(); // DAO agora usa lista
+        tableAlunos.setItems(listaDeAlunos);
+        tableAlunos.refresh();
     }
 
     public void limparPainelCentral() {
