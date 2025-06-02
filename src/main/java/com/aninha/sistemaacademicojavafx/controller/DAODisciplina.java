@@ -1,4 +1,4 @@
-package com.aninha.sistemaacademicojavafx.modelo.persistencia;
+package com.aninha.sistemaacademicojavafx.controller;
 
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import javafx.collections.FXCollections;

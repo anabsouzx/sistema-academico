@@ -3,7 +3,7 @@ package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 // Importações necessárias
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOMatricula;
+import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarMatricula;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

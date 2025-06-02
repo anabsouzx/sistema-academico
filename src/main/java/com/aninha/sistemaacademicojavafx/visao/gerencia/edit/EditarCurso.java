@@ -1,7 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOCurso;
+import com.aninha.sistemaacademicojavafx.controller.DAOCurso;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarCursos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
