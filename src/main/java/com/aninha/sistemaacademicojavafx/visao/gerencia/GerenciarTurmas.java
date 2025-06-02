@@ -1,7 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-import com.aninha.sistemaacademicojavafx.modelo.Aluno;
-import com.aninha.sistemaacademicojavafx.modelo.Turma;
+import com.aninha.sistemaacademicojavafx.modelo.*;
 import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarTurma;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -108,7 +108,7 @@ public class GerenciarTurmas implements Initializable {
                 String nomes = listaAlunos.stream()
                         .map(Aluno::getNome)
                         .limit(3) // Limita para não ficar muito extenso
-                        .collect(Collectors.joining(", "));
+                        .collect(Collectors.joining("\n"));
                 if (listaAlunos.size() > 3) {
                     nomes += ", ... (" + listaAlunos.size() + " total)";
                 } else {
