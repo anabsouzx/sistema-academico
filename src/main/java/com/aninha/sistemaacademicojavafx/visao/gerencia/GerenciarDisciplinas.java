@@ -1,6 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
+import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina;
@@ -104,7 +105,8 @@ public class GerenciarDisciplinas implements Initializable {
         ObservableList<Disciplina> lista = daoDisciplina.listarDisciplinas();
         tableDisciplinas.setItems(lista);
         if(lista.isEmpty()){
-            Disciplina d = new Disciplina("boquete parafuso",80,1);
+            Curso c = new Curso("gostrofenofe", 8);
+            Disciplina d = new Disciplina("boquete parafuso",c,1);
             daoDisciplina.adicionar(d);
         }
         tableDisciplinas.refresh();

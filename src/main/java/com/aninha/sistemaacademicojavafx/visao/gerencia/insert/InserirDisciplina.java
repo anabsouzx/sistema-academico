@@ -64,10 +64,8 @@ public class InserirDisciplina implements Initializable {
             return;
         }
 
-        int codCurso = cursoSelecionado.getCodigoCurso();
-
         // Criação da disciplina
-        Disciplina novaDisciplina = new Disciplina(nome, cargaH, codCurso);
+        Disciplina novaDisciplina = new Disciplina(nome, cursoSelecionado, cargaH);
         daoDisciplina.adicionar(novaDisciplina);
 
         mostrarAlerta("Sucesso", "Disciplina cadastrada com sucesso!", Alert.AlertType.INFORMATION);

@@ -116,8 +116,9 @@ public class GerenciarMatriculas implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Associa as colunas da tabela às propriedades da classe Matricula
         colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numMatricula"));
-        colunaCodA.setCellValueFactory(new PropertyValueFactory<>("codAluno"));
-        colunaCodDisc.setCellValueFactory(new PropertyValueFactory<>("codDisciplina"));
+        colunaCodA.setCellValueFactory(new PropertyValueFactory<>("codigoAlunoProperty")); // Usando o novo getter
+        colunaCodDisc.setCellValueFactory(new PropertyValueFactory<>("nomeAluno"));
+        //colunaCodDisc.setCellValueFactory(new PropertyValueFactory<>("codDisciplina"));
         colunaSemestre.setCellValueFactory(new PropertyValueFactory<>("semestre"));
         colunaAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
 

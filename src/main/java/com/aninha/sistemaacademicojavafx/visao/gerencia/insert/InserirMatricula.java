@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -34,11 +35,12 @@ public class InserirMatricula implements Initializable {
     @FXML
     private TextField txtSemestre;
 
-    private DAOAluno daoAluno;
     private DAOMatricula daoMatricula;
+    private DAOAluno daoAluno;
     private DAODisciplina daoDisciplina;
 
     public InserirMatricula(){
+        this.daoMatricula = new DAOMatricula();
         this.daoAluno = new DAOAluno();
         this.daoDisciplina = new DAODisciplina();
     }
@@ -67,12 +69,37 @@ public class InserirMatricula implements Initializable {
         }
 
         Matricula matricula = new Matricula(num,alunoSelecionado,disciplinaSelecionada,smt,ano);
+
+        try {
+            daoMatricula.adicionar(matricula); // O DAO agora lida com a lista
+
+            // Feedback para o utilizador
+            Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+            sucesso.setTitle("Sucesso");
+            sucesso.setHeaderText("matricula inserido");
+            sucesso.setContentText("matricula do aluno " + alunoSelecionado.getNome() + " foi inserido com sucesso!");
+            sucesso.showAndWait();
+
+            txtSemestre.setText("");
+            txtAno.setText("");
+            comboBoxAluno.setItems(null);
+            comboBoxDisc.setItems(null);
+            txtSemestre.requestFocus(); // Foco no primeiro campo para nova inserção
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert erro = new Alert(Alert.AlertType.ERROR);
+            erro.setTitle("Erro");
+            erro.setHeaderText("Erro ao inserir aluno");
+            erro.setContentText("Ocorreu um erro inesperado: " + e.getMessage());
+            erro.showAndWait();
+        }
         //Conexao conexao = null;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         popularComboBoxAlunos();
+        popularComboBoxDisc();
     }
 
     private void popularComboBoxAlunos() {

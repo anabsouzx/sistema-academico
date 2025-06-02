@@ -55,4 +55,12 @@ public class Matricula {
     public void setAno(int ano) {
         this.ano = ano;
     }
+
+    public String getNomeAluno() {
+        return (this.aluno != null) ? this.aluno.getNome() : "N/D";
+    }
+
+    public Integer getCodigoAlunoProperty() { // Renomeei para evitar conflito se mantiver getCodAluno() int
+        return (this.aluno != null) ? this.aluno.getCodigoAluno() : null;
+    }
 }

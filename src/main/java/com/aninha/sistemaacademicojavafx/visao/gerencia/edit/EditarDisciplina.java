@@ -1,5 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 
+import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarDisciplinas;
@@ -34,7 +35,7 @@ public class EditarDisciplina {
         if (disciplinaParaEditar != null) {
             txtNomeDisciplina.setText(disciplinaParaEditar.getNomeDisciplina());
             txtCargaHoraria.setText(String.valueOf(disciplinaParaEditar.getCargaHoraria()));
-            txtCodCurso.setText(String.valueOf(disciplinaParaEditar.getCodCurso()));
+            txtCodCurso.setText(String.valueOf(disciplinaParaEditar.getCurso()));
         }
     }
 
@@ -51,20 +52,20 @@ public class EditarDisciplina {
         }
 
         int cargaHoraria;
-        int codCurso;
+        Curso curso = null;
 
         try {
             cargaHoraria = Integer.parseInt(cargaStr);
-            codCurso = Integer.parseInt(codCursoStr);
+
         } catch (NumberFormatException e) {
-            mostrarAlerta("Erro de formato", "Carga horária e código do curso devem ser números inteiros.", Alert.AlertType.ERROR);
+            mostrarAlerta("Erro de formato", "Carga horária deve ser um número inteiros.", Alert.AlertType.ERROR);
             return;
         }
 
         // Atualiza os dados na instância
         disciplinaParaEditar.setNomeDisciplina(nome);
         disciplinaParaEditar.setCargaHoraria(cargaHoraria);
-        disciplinaParaEditar.setCodCurso(codCurso);
+        disciplinaParaEditar.setCurso(curso);
 
         // Atualiza no DAO
         DAODisciplina dao = new DAODisciplina();
