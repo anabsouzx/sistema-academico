@@ -46,7 +46,12 @@ public class InserirCurso {
         try {
             duracao = Integer.parseInt(duracaoStr);
         } catch (NumberFormatException e) {
-            System.out.println("ei man isso né um numero não");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Número inválido");
+            alert.setContentText("Certifique-se de digitar um número no campo Duração.");
+            alert.show();
+            txtDuracao.requestFocus();
             return;
         }
 
