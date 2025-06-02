@@ -2,16 +2,22 @@ package com.aninha.sistemaacademicojavafx.modelo;
 
 public class Disciplina {
     private int codigoDisciplina;
-    private String nomeDisciplina;
+    private String NomeDisciplina;
     private int codCurso;
     private int cargaHoraria;
 
 
     public Disciplina(int codigoDisciplina, String nomeDisciplina, int codCurso, int cargaHoraria) {
         this.codigoDisciplina = codigoDisciplina;
-        this.nomeDisciplina = nomeDisciplina;
+        this.NomeDisciplina = nomeDisciplina;
         this.codCurso = codCurso;
         this.cargaHoraria = cargaHoraria;
+    }
+
+    public Disciplina(String nomeDisciplina, int cargaHoraria, int codCurso) {
+        this.NomeDisciplina = nomeDisciplina;
+        this.cargaHoraria = cargaHoraria;
+        this.codCurso = codCurso;
     }
 
     public int getCodigoDisciplina() {
@@ -23,11 +29,11 @@ public class Disciplina {
     }
 
     public String getNomeDisciplina() {
-        return nomeDisciplina;
+        return NomeDisciplina;
     }
 
     public void setNomeDisciplina(String nomeDisciplina) {
-        this.nomeDisciplina = nomeDisciplina;
+        this.NomeDisciplina = nomeDisciplina;
     }
 
     public int getCodCurso() {

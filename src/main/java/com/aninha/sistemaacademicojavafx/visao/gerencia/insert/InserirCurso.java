@@ -1,8 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.insert;
 
-import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOCurso;
+import com.aninha.sistemaacademicojavafx.controller.DAOCurso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -21,6 +20,10 @@ public class InserirCurso {
     private TextField txtNomeC;
 
     DAOCurso daoCurso;
+
+    public InserirCurso(){
+        this.daoCurso = new DAOCurso();
+    }
 
     @FXML
     void insereCurso(ActionEvent event) {

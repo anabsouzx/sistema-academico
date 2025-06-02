@@ -3,7 +3,7 @@ package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 // Importações necessárias
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOMatricula;
+import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarMatricula;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -101,7 +101,7 @@ public class GerenciarMatriculas implements Initializable {
         }
 
         // Exclui a matrícula e atualiza a tabela
-        daoMatricula.excluirMatricula(matriculaSelecionada);
+        //daoMatricula.excluirMatricula(matriculaSelecionada);
         carregarDados();
     }
 

@@ -1,7 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAODisciplina;
+import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

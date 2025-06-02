@@ -1,9 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Professor;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOAluno;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOProfessor;
+import com.aninha.sistemaacademicojavafx.controller.DAOProfessor;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
