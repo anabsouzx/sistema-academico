@@ -16,27 +16,28 @@ public class DAOTurma {
         // Construtor padrão
     }
 
-
-     //Retorna todas as turmas.
+    // Retorna todas as turmas
     public ObservableList<Turma> listarTurmas() {
         return turmas;
     }
 
-
-    // Retorna uma cópia da lista de turmas (útil para ComboBox, etc.).
+    // Retorna uma cópia da lista de turmas (útil para ComboBox, etc.)
     public ObservableList<Turma> listarTurmasComboBox() {
         return FXCollections.observableArrayList(turmas);
     }
 
-
-     //Adiciona uma nova turma à lista com código gerado automaticamente.
+    // Adiciona uma nova turma com código gerado automaticamente
     public void adicionar(Turma turma) {
         turma.setCodigoTurma(proximoCodigoTurma++);
         turmas.add(turma);
     }
 
-    //Remove todas as turmas e reinicia o contador de código.
+    // Remove uma turma da lista
+    public void excluirTurma(Turma turma) {
+        turmas.remove(turma);
+    }
 
+    // Remove todas as turmas e reinicia o contador de código
     public void apagarTudo() {
         turmas.clear();
         proximoCodigoTurma = 1;
