@@ -1,8 +1,8 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.insert;
 
-import com.aninha.sistemaacademicojavafx.controller.DAOCurso;
-import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
+import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
+import com.aninha.sistemaacademicojavafx.modelo.persistencia.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
