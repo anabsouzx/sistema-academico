@@ -1,6 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-// Importações necessárias
+//imports nescessarios
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAOCurso;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarCurso;
@@ -98,13 +98,14 @@ public class GerenciarCursos implements Initializable {
         carregarDados();
     }
 
-    // Método chamado ao clicar em "Inserir novo curso"
+    // Metodo chamado ao clicar em "Inserir novo curso"
+
     @FXML
     void inserirCurso(ActionEvent event) throws IOException {
         carregarTela("insert/inserir-curso.fxml");
     }
 
-    // Método chamado automaticamente ao carregar o FXML (inicializa a tela)
+    // Metodo chamado automaticamente ao carregar o FXML (inicializa a tela)
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Associa as colunas da tabela às propriedades da classe Curso
