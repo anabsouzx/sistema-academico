@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -96,6 +97,10 @@ public class GerenciarAlunos implements Initializable {
     public void carregarDados() {
         ObservableList<Aluno> listaDeAlunos = daoAluno.listarAlunos(); // DAO agora usa lista
         tableAlunos.setItems(listaDeAlunos);
+        if(listaDeAlunos.isEmpty()){
+            Aluno a = new Aluno("viado", LocalDate.of(1995, 6, 2),"12345678900","11999999999");
+            daoAluno.adicionar(a);
+        }
         tableAlunos.refresh();
     }
 

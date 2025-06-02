@@ -2,20 +2,17 @@ package com.aninha.sistemaacademicojavafx.modelo;
 
 import java.util.ArrayList;
 
+
 public class Turma {
     private int codigoTurma;
     private int codigoProfessor;
     private int codDisciplina;
-    private int ano;
-    private int semestre;
-    private ArrayList<Aluno> listaAlunos;
+    private ArrayList<Aluno> listaAlunos; // Lista tipada com objetos do tipo Aluno
 
-    public Turma(int codigoTurma, int codDisciplina, int codigoProfessor, int ano, int semestre, ArrayList<Aluno> listaAlunos) {
+    public Turma(int codigoTurma, int codDisciplina, int codigoProfessor, ArrayList<Aluno> listaAlunos) {
         this.codigoTurma = codigoTurma;
         this.codDisciplina = codDisciplina;
         this.codigoProfessor = codigoProfessor;
-        this.ano = ano;
-        this.semestre = semestre;
         this.listaAlunos = listaAlunos;
     }
 
@@ -43,22 +40,6 @@ public class Turma {
         this.codDisciplina = codDisciplina;
     }
 
-    public int getAno() {
-        return ano;
-    }
-
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-
-    public int getSemestre() {
-        return semestre;
-    }
-
-    public void setSemestre(int semestre) {
-        this.semestre = semestre;
-    }
-
     public ArrayList<Aluno> getListaAlunos() {
         return listaAlunos;
     }
@@ -70,6 +51,7 @@ public class Turma {
     public void adicionarAluno(Aluno aluno) {
         this.listaAlunos.add(aluno);
     }
+
 
     public boolean removerAluno(Aluno aluno) {
         return this.listaAlunos.remove(aluno);

@@ -1,11 +1,11 @@
 package com.aninha.sistemaacademicojavafx.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Professor extends Pessoa{
     private int CodigoProfessor;
 
-    public Professor(String nome, Date dataDeNascimento, String cpf, String telefone) {
+    public Professor(String nome, LocalDate dataDeNascimento, String cpf, String telefone) {
         super(nome, dataDeNascimento, cpf, telefone);
     }
 

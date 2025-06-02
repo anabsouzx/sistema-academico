@@ -1,11 +1,11 @@
 package com.aninha.sistemaacademicojavafx.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Pessoa {
     int codigo;
     String nome;
-    Date dataDeNascimento;
+    LocalDate dataDeNascimento;
     String cpf;
     String telefone;
 
@@ -18,11 +18,11 @@ public abstract class Pessoa {
         this.nome = nome;
     }
 
-    public Date getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(Date dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
@@ -43,7 +43,7 @@ public abstract class Pessoa {
     }
 
     // construtor
-    public Pessoa(String nome, Date dataDeNascimento, String cpf, String telefone) {
+    public Pessoa(String nome, LocalDate dataDeNascimento, String cpf, String telefone) {
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
         this.cpf = cpf;

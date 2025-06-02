@@ -2,16 +2,16 @@ package com.aninha.sistemaacademicojavafx.modelo;
 
 public class Matricula {
     private int numMatricula;
-    private int codAluno;
-    private int codDisciplina;
+    private Aluno aluno;
+    private Disciplina disciplina;
     private int semestre;
     private int ano;
     // private Aluno aluno;
 
-    public Matricula(int numMatricula,int codAluno, int codDisciplina, int semestre, int ano) {
+    public Matricula(int numMatricula,Aluno aluno, Disciplina disciplina, int semestre, int ano) {
         this.numMatricula = numMatricula;
-        this.codAluno = codAluno;
-        this.codDisciplina = codDisciplina;
+        this.aluno = aluno;
+        this.disciplina = disciplina;
         this.semestre = semestre;
         this.ano = ano;
     }
@@ -24,20 +24,20 @@ public class Matricula {
         this.numMatricula = numMatricula;
     }
 
-    public int getCodAluno() {
-        return codAluno;
+    public Aluno getAluno() {
+        return aluno;
     }
 
-    public void setCodAluno(int codAluno) {
-        this.codAluno = codAluno;
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
-    public int getCodDisciplina() {
-        return codDisciplina;
+    public Disciplina getCodDisciplina() {
+        return disciplina;
     }
 
-    public void setCodDisciplina(int codDisciplina) {
-        this.codDisciplina = codDisciplina;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public int getSemestre() {

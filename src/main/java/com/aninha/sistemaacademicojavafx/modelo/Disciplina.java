@@ -2,47 +2,37 @@ package com.aninha.sistemaacademicojavafx.modelo;
 
 public class Disciplina {
     private int codigoDisciplina;
-    private String NomeDisciplina;
-    private int codCurso;
+    private String nomeDisciplina;
+    private Curso curso; // associação correta com o objeto Curso
     private int cargaHoraria;
 
-
-    public Disciplina(int codigoDisciplina, String nomeDisciplina, int codCurso, int cargaHoraria) {
+    // Construtor completo
+    public Disciplina(int codigoDisciplina, String nomeDisciplina, Curso curso, int cargaHoraria) {
         this.codigoDisciplina = codigoDisciplina;
-        this.NomeDisciplina = nomeDisciplina;
-        this.codCurso = codCurso;
+        this.nomeDisciplina = nomeDisciplina;
+        this.curso = curso;
         this.cargaHoraria = cargaHoraria;
     }
 
-    public Disciplina(String nomeDisciplina, int cargaHoraria, int codCurso) {
-        this.NomeDisciplina = nomeDisciplina;
+    // Construtor usado na inserção
+    public Disciplina(String nomeDisciplina, Curso curso, int cargaHoraria) {
+        this.nomeDisciplina = nomeDisciplina;
+        this.curso = curso;
         this.cargaHoraria = cargaHoraria;
-        this.codCurso = codCurso;
     }
 
-    public int getCodigoDisciplina() {
-        return codigoDisciplina;
-    }
+    // Getters e setters
+    public int getCodigoDisciplina() {return codigoDisciplina; }
 
-    public void setCodigoDisciplina(int codigoDisciplina) {
-        this.codigoDisciplina = codigoDisciplina;
-    }
+    public void setCodigoDisciplina(int codigoDisciplina) {this.codigoDisciplina = codigoDisciplina; }
 
-    public String getNomeDisciplina() {
-        return NomeDisciplina;
-    }
+    public String getNomeDisciplina() { return nomeDisciplina; }
 
-    public void setNomeDisciplina(String nomeDisciplina) {
-        this.NomeDisciplina = nomeDisciplina;
-    }
+    public void setNomeDisciplina(String nomeDisciplina) { this.nomeDisciplina = nomeDisciplina; }
 
-    public int getCodCurso() {
-        return codCurso;
-    }
+    public Curso getCurso() { return curso; }
 
-    public void setCodCurso(int codCurso) {
-        this.codCurso = codCurso;
-    }
+    public void setCurso(Curso curso) { this.curso = curso; }
 
     public int getCargaHoraria() {
         return cargaHoraria;
