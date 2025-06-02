@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarTurmas"
             prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+    <!-- Topo com botões -->
+    <top>
+        <HBox spacing="10" padding="10">
+            <Button text="Inserir Turma" onAction="#inserirTurma"/>
+            <Button text="Editar Turma" onAction="#editarTurma"/>
+            <Button text="Excluir Turma" onAction="#excluirTurma"/>
+        </HBox>
+    </top>
+
+    <!-- Tabela no centro -->
+    <center>
+        <TableView fx:id="tableTurmas">
+            <columns>
+                <TableColumn fx:id="colunaCodigo" text="Código Turma" prefWidth="100"/>
+                <TableColumn fx:id="colunaCodDisciplina" text="Cód. Disciplina" prefWidth="150"/>
+                <TableColumn fx:id="colunaCodProfessor" text="Cód. Professor" prefWidth="150"/>
+                <TableColumn fx:id="colunaAno" text="Ano" prefWidth="100"/>
+                <TableColumn fx:id="colunaSemestre" text="Semestre" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
