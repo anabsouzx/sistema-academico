@@ -1,5 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
+import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina;
@@ -17,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class GerenciarDisciplinas implements Initializable {
@@ -101,6 +103,10 @@ public class GerenciarDisciplinas implements Initializable {
     public void carregarDados() {
         ObservableList<Disciplina> lista = daoDisciplina.listarDisciplinas();
         tableDisciplinas.setItems(lista);
+        if(lista.isEmpty()){
+            Disciplina d = new Disciplina("boquete parafuso",80,1);
+            daoDisciplina.adicionar(d);
+        }
         tableDisciplinas.refresh();
     }
 

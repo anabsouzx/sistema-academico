@@ -1,6 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 //imports nescessarios
+import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.controller.DAOCurso;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarCurso;
@@ -18,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 // Classe que controla a tela de gerenciamento de cursos
@@ -121,6 +123,10 @@ public class GerenciarCursos implements Initializable {
     public void carregarDados() {
         ObservableList<Curso> listaDeCursos = daoCurso.listarCursos();
         tableCursos.setItems(listaDeCursos);
+        if(listaDeCursos.isEmpty()){
+            Curso c = new Curso("gostrofenofe", 8);
+            daoCurso.adicionar(c);
+        }
         tableCursos.refresh();
     }
 

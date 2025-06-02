@@ -6,14 +6,6 @@ public class Disciplina {
     private int codCurso;
     private int cargaHoraria;
 
-
-    public Disciplina(int codigoDisciplina, String nomeDisciplina, int codCurso, int cargaHoraria) {
-        this.codigoDisciplina = codigoDisciplina;
-        this.NomeDisciplina = nomeDisciplina;
-        this.codCurso = codCurso;
-        this.cargaHoraria = cargaHoraria;
-    }
-
     public Disciplina(String nomeDisciplina, int cargaHoraria, int codCurso) {
         this.NomeDisciplina = nomeDisciplina;
         this.cargaHoraria = cargaHoraria;

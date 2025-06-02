@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class Turma {
     private int codigoTurma;
-    private int codigoProfessor;
-    private int codDisciplina;
+    private Professor professor;
+    private Disciplina disciplina;
     private ArrayList<Aluno> listaAlunos; // Lista tipada com objetos do tipo Aluno
 
-    public Turma(int codigoTurma, int codDisciplina, int codigoProfessor, ArrayList<Aluno> listaAlunos) {
+    public Turma(int codigoTurma, Disciplina disciplina, Professor professor, ArrayList<Aluno> listaAlunos) {
         this.codigoTurma = codigoTurma;
-        this.codDisciplina = codDisciplina;
-        this.codigoProfessor = codigoProfessor;
+        this.disciplina = disciplina;
+        this.professor = professor;
         this.listaAlunos = listaAlunos;
     }
 
@@ -24,20 +24,20 @@ public class Turma {
         this.codigoTurma = codigoTurma;
     }
 
-    public int getCodigoProfessor() {
-        return codigoProfessor;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public void setCodigoProfessor(int codigoProfessor) {
-        this.codigoProfessor = codigoProfessor;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
-    public int getCodDisciplina() {
-        return codDisciplina;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setCodDisciplina(int codDisciplina) {
-        this.codDisciplina = codDisciplina;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public ArrayList<Aluno> getListaAlunos() {
@@ -51,8 +51,7 @@ public class Turma {
     public void adicionarAluno(Aluno aluno) {
         this.listaAlunos.add(aluno);
     }
-
-
+    
     public boolean removerAluno(Aluno aluno) {
         return this.listaAlunos.remove(aluno);
     }
