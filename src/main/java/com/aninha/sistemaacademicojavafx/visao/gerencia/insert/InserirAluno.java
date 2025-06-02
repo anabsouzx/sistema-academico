@@ -25,7 +25,7 @@ public class InserirAluno {
     @FXML
     private TextField txtTel;
 
-    DAOAluno daoAluno = new DAOAluno();
+    DAOAluno daoAluno;
 
     public InserirAluno(){
         this.daoAluno = new DAOAluno();

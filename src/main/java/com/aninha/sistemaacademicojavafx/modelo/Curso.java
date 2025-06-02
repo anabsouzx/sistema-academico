@@ -6,8 +6,7 @@ public class Curso {
     private int duracao;
 
 
-    public Curso(int codigoCurso, String nomeCurso, int duracao) {
-        this.codigoCurso = codigoCurso;
+    public Curso(String nomeCurso, int duracao) {
         this.nomeCurso = nomeCurso;
         this.duracao = duracao;
     }

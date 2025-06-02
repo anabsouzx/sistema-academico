@@ -49,7 +49,7 @@ public class MainControllerView {
 
     @FXML
     void gerenciarProfs(ActionEvent event) throws IOException {
-        carregarTela("gerencia/gerenciar-matriculas.fxml");
+        carregarTela("gerencia/gerenciar-professores.fxml");
     }
 
     @FXML
