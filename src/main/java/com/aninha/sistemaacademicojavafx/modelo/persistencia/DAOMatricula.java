@@ -5,34 +5,53 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * DAO simulado para gerenciamento de matrículas em memória (sem uso de banco de dados).
+ * Classe DAO (Data Access Object) responsável pelo gerenciamento de matrículas.
+ * Armazena dados em memória sem uso de banco de dados.
  */
 public class DAOMatricula {
 
-    // Lista de matrículas armazenadas em memória
+    // Lista que armazena todas as matrículas em memória
     private static ObservableList<Matricula> matriculas = FXCollections.observableArrayList();
 
-    // Contador para gerar número de matrícula automaticamente
+    // Contador interno para gerar automaticamente o número da matrícula
     private static int proximoNumeroMatricula = 1;
 
+    // Construtor padrão
     public DAOMatricula() {
-        // Construtor padrão
+        // Pode ser usado para carregar dados iniciais, se necessário
     }
 
-    //Retorna a lista completa de matrículas cadastradas.
+    /**
+     * Retorna a lista completa de matrículas cadastradas.
+     *
+     * @return lista de objetos Matricula
+     */
     public ObservableList<Matricula> listarMatriculas() {
         return matriculas;
     }
 
-
-    //Adiciona uma nova matrícula à lista com número automático.
-
+    /**
+     * Adiciona uma nova matrícula à lista com número gerado automaticamente.
+     *
+     * @param m matrícula a ser adicionada
+     */
     public void adicionar(Matricula m) {
         m.setNumMatricula(proximoNumeroMatricula++);
         matriculas.add(m);
     }
 
-    //Remove todas as matrículas e reinicia o contador de numMatricula.
+    /**
+     * Remove uma matrícula específica da lista.
+     *
+     * @param matricula matrícula a ser removida
+     */
+    public void excluirMatricula(Matricula matricula) {
+        matriculas.remove(matricula);
+    }
+
+    /**
+     * Remove todas as matrículas da lista e reinicia o contador de número de matrícula.
+     */
     public void apagarTudo() {
         matriculas.clear();
         proximoNumeroMatricula = 1;
