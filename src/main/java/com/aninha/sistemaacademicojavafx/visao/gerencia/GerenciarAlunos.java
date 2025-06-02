@@ -96,6 +96,9 @@ public class GerenciarAlunos implements Initializable {
     public void carregarDados() {
         ObservableList<Aluno> listaDeAlunos = daoAluno.listarAlunos(); // DAO agora usa lista
         tableAlunos.setItems(listaDeAlunos);
+        //if(listaDeAlunos.isEmpty()){
+        //    daoAluno.adicionar(Aluno a = new Aluno("viado", "18/12/1996","12345678900","11999999999"));
+        //}
         tableAlunos.refresh();
     }
 

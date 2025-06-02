@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class InserirAluno {
@@ -48,14 +51,13 @@ public class InserirAluno {
         }
 
         // converter data
-        Date dataD = null;
+        LocalDate dataD = null;
         String formato = "dd/MM/yyyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(formato);
-        sdf.setLenient(false);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         try {
-            dataD = sdf.parse(data);
-        } catch (ParseException e) {
+            dataD = LocalDate.parse(data, formatter);
+        } catch (DateTimeParseException e) {
             Alert dataA = new Alert(Alert.AlertType.ERROR);
             dataA.setTitle("Data Incorreta");
             dataA.setHeaderText("O campo data não foi preenchido corretamente");
