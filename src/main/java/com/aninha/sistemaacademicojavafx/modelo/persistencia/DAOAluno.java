@@ -5,27 +5,30 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class DAOAluno {
+    // Lista estática de alunos que simula um banco de dados na memória
     private static ObservableList<Aluno> alunos = FXCollections.observableArrayList();
-    private static int proximoCodigoAluno = 1;
+    private static int proximoCodigoAluno = 1; // Gerador automático de códigos
 
-    public DAOAluno(){
+    public DAOAluno() {} // Construtor padrão
 
-    }
-
-    public ObservableList<Aluno> listarAlunos(){
+    // Retorna todos os alunos cadastrados
+    public ObservableList<Aluno> listarAlunos() {
         return alunos;
     }
 
-    public ObservableList<Aluno> listarAlunosCb(){
+    // Retorna uma cópia da lista de alunos para uso em ComboBox
+    public ObservableList<Aluno> listarTodosAlunosParaComboBox() {
         return FXCollections.observableArrayList(alunos);
     }
 
+    // Adiciona um aluno e define um código único automaticamente
     public void adicionar(Aluno aluno) {
-        aluno.setCodigoAluno(proximoCodigoAluno++); // Define o código e incrementa para o próximo
+        aluno.setCodigoAluno(proximoCodigoAluno++);
         alunos.add(aluno);
     }
 
-    public void apagarTudo(){
+    // Apaga todos os alunos e reinicia o contador de código
+    public void apagarTudo() {
         alunos.clear();
         proximoCodigoAluno = 1;
     }
