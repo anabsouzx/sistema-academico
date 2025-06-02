@@ -3,7 +3,9 @@ package com.aninha.sistemaacademicojavafx.visao.gerencia.insert;
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
-import com.aninha.sistemaacademicojavafx.modelo.persistencia.*;
+import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
+import com.aninha.sistemaacademicojavafx.controller.DAOAluno;
+import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,29 +63,28 @@ public class InserirMatricula implements Initializable {
             return;
         }
 
-        // adicionando dados a tabela blabllabla
         Matricula matricula = new Matricula(num,codAluno,codDisc,smt,ano);
         //Conexao conexao = null;
-
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*Conexao c = new Conexao();
+        /*
+        Conexao c = new Conexao();
         daoAluno = new DAOAluno(c.getConexao());
         daoMatricula = new DAOMatricula(c.getConexao());
         daoDisciplina = new DAODisciplina(c.getConexao());
 
         popularComboBoxAlunos();
-        popularComboBoxDisc();*/
+        popularComboBoxDisc();
+        */
     }
 
     private void popularComboBoxAlunos() {
-        /*ObservableList<Aluno> alunos = daoAluno.listarTodosAlunosParaComboBox();
+        /*
+        ObservableList<Aluno> alunos = daoAluno.listarTodosAlunosParaComboBox();
         comboBoxAluno.setItems(alunos);
 
-        // Configurar como o objeto Aluno é exibido no ComboBox
         comboBoxAluno.setConverter(new StringConverter<Aluno>() {
             @Override
             public String toString(Aluno aluno) {
@@ -101,20 +102,13 @@ public class InserirMatricula implements Initializable {
                         .orElse(null);
             }
         });
-
-        // Opcional: Adicionar um listener para quando a seleção muda
-        /*comboBoxAluno.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            if (newValue != null) {
-                System.out.println("Aluno selecionado: " + newValue.getNomeAluno() + " ID: " + newValue.getCodigoAluno());
-            }
-        });*/
+        */
     }
 
     private void popularComboBoxDisc() {
         ObservableList<Disciplina> disciplinas = daoDisciplina.listarDisciplinasComboBox();
         comboBoxDisc.setItems(disciplinas);
 
-        // Configurar como o objeto Aluno é exibido no ComboBox
         comboBoxDisc.setConverter(new StringConverter<Disciplina>() {
             @Override
             public String toString(Disciplina disciplina) {
