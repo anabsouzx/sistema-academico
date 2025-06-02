@@ -1,5 +1,7 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 
+import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
+import com.aninha.sistemaacademicojavafx.modelo.Professor;
 import com.aninha.sistemaacademicojavafx.modelo.Turma;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarTurmas;
 import javafx.event.ActionEvent;
@@ -32,10 +34,10 @@ public class EditarTurma {
         this.controllerGerenciarTurmas = controller;
 
         txtCodigoTurma.setText(String.valueOf(turma.getCodigoTurma()));
-        txtCodigoProfessor.setText(String.valueOf(turma.getCodigoProfessor()));
-        txtCodDisciplina.setText(String.valueOf(turma.getCodDisciplina()));
-        txtAno.setText(String.valueOf(turma.getAno()));
-        txtSemestre.setText(String.valueOf(turma.getSemestre()));
+        txtCodigoProfessor.setText(String.valueOf(turma.getProfessor().getCodigoProfessor()));
+        txtCodDisciplina.setText(String.valueOf(turma.getDisciplina().getCodigoDisciplina()));
+        txtAno.setText(String.valueOf(turma.getAno())); // Supondo que ano foi adicionado
+        txtSemestre.setText(String.valueOf(turma.getSemestre())); // idem
     }
 
     @FXML
@@ -48,15 +50,13 @@ public class EditarTurma {
             int semestre = Integer.parseInt(txtSemestre.getText());
 
             turmaSelecionada.setCodigoTurma(codTurma);
-            turmaSelecionada.setCodigoProfessor(codProfessor);
-            turmaSelecionada.setCodDisciplina(codDisciplina);
+            //turmaSelecionada.setProfessor(new Professor(codProfessor));
+            turmaSelecionada.setDisciplina(new Disciplina(codDisciplina));
             turmaSelecionada.setAno(ano);
             turmaSelecionada.setSemestre(semestre);
 
-            // Aqui você pode adicionar código para atualizar no banco de dados, se necessário
-
-            controllerGerenciarTurmas.carregarDados(); // Atualiza a tabela
-            controllerGerenciarTurmas.limparPainelCentral(); // Volta para a tela principal
+            controllerGerenciarTurmas.carregarDados();
+            controllerGerenciarTurmas.limparPainelCentral();
 
         } catch (NumberFormatException e) {
             mostrarAlerta("Erro de Formato", "Todos os campos devem ser preenchidos com números válidos.");

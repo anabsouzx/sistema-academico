@@ -13,6 +13,9 @@ public class Disciplina {
         this.curso = curso;
         this.cargaHoraria = cargaHoraria;
     }
+    public Disciplina(int codigoDisciplina) {
+        this.codigoDisciplina = codigoDisciplina;
+    }
 
     // Construtor usado na inserção
     public Disciplina(String nomeDisciplina, Curso curso, int cargaHoraria) {
