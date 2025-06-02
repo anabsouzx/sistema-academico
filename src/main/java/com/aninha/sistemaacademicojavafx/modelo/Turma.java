@@ -24,6 +24,20 @@ public class Turma {
         this.codigoTurma = codigoTurma;
     }
 
+    public String getNomeProfessor() {
+        if (this.professor != null) {
+            return this.professor.getNome(); // Chama o getNome() do objeto Professor
+        }
+        return "null";
+    }
+
+    public String getNomeDisciplina() {
+        if (this.disciplina != null) {
+            return this.disciplina.getNomeDisciplina(); // Chama o getNome() do objeto Professor
+        }
+        return "null";
+    }
+
     public Professor getProfessor() {
         return professor;
     }

@@ -31,11 +31,11 @@ public class EditarTurma {
         this.turmaSelecionada = turma;
         this.controllerGerenciarTurmas = controller;
 
-        txtCodigoTurma.setText(String.valueOf(turma.getCodigoTurma()));
-        txtCodigoProfessor.setText(String.valueOf(turma.getCodigoProfessor()));
-        txtCodDisciplina.setText(String.valueOf(turma.getCodDisciplina()));
-        txtAno.setText(String.valueOf(turma.getAno()));
-        txtSemestre.setText(String.valueOf(turma.getSemestre()));
+        //txtCodigoTurma.setText(String.valueOf(turma.getCodigoTurma()));
+       // txtCodigoProfessor.setText(String.valueOf(turma.getCodigoProfessor()));
+        //txtCodDisciplina.setText(String.valueOf(turma.getCodDisciplina()));
+        //txtAno.setText(String.valueOf(turma.getAno()));
+        //txtSemestre.setText(String.valueOf(turma.getSemestre()));
     }
 
     @FXML
@@ -48,10 +48,10 @@ public class EditarTurma {
             int semestre = Integer.parseInt(txtSemestre.getText());
 
             turmaSelecionada.setCodigoTurma(codTurma);
-            turmaSelecionada.setCodigoProfessor(codProfessor);
-            turmaSelecionada.setCodDisciplina(codDisciplina);
-            turmaSelecionada.setAno(ano);
-            turmaSelecionada.setSemestre(semestre);
+            //turmaSelecionada.setCodigoProfessor(codProfessor);
+            //turmaSelecionada.setCodDisciplina(codDisciplina);
+           // turmaSelecionada.setAno(ano);
+           // turmaSelecionada.setSemestre(semestre);
 
             // Aqui você pode adicionar código para atualizar no banco de dados, se necessário
 

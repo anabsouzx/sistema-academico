@@ -1,8 +1,10 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
+import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Turma;
 import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarTurma;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,30 +19,30 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class GerenciarTurmas implements Initializable {
 
     @FXML
     private BorderPane painelPrincipal;
 
+    // Em GerenciarTurmas.java
     @FXML
     private TableView<Turma> tableTurmas;
 
     @FXML
-    private TableColumn<Turma, Integer> colunaCodigo;
+    private TableColumn<Turma, Integer> colunaCodigoTurma;
 
     @FXML
-    private TableColumn<Turma, Integer> colunaDisciplina;
+    private TableColumn<Turma, String> colunaProfessor; // Para exibir o nome do Professor
 
     @FXML
-    private TableColumn<Turma, Integer> colunaProfessor;
+    private TableColumn<Turma, String> colunaDisciplina; // Para exibir o nome da Disciplina
 
     @FXML
-    private TableColumn<Turma, Integer> colunaAno;
-
-    @FXML
-    private TableColumn<Turma, Integer> colunaSemestre;
+    private TableColumn<Turma, String> colunaAlunos; // Para informações da lista de Alunos
 
     private DAOTurma daoTurma;
 
@@ -92,11 +94,29 @@ public class GerenciarTurmas implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colunaCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoTurma"));
-        colunaDisciplina.setCellValueFactory(new PropertyValueFactory<>("codDisciplina"));
-        colunaProfessor.setCellValueFactory(new PropertyValueFactory<>("codProfessor"));
-        colunaAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
-        colunaSemestre.setCellValueFactory(new PropertyValueFactory<>("semestre"));
+        colunaCodigoTurma.setCellValueFactory(new PropertyValueFactory<>("codigoTurma"));
+        colunaDisciplina.setCellValueFactory(new PropertyValueFactory<>("nomeDisciplina"));
+        colunaProfessor.setCellValueFactory(new PropertyValueFactory<>("nomeProfessor"));
+
+        // coluna alunos
+        colunaAlunos.setCellValueFactory(cellDataFeatures -> {
+            Turma turma = cellDataFeatures.getValue();
+            ArrayList<Aluno> listaAlunos = turma.getListaAlunos();
+            if (listaAlunos == null || listaAlunos.isEmpty()) {
+                return new SimpleStringProperty("Nenhum aluno");
+            } else {
+                String nomes = listaAlunos.stream()
+                        .map(Aluno::getNome)
+                        .limit(3) // Limita para não ficar muito extenso
+                        .collect(Collectors.joining(", "));
+                if (listaAlunos.size() > 3) {
+                    nomes += ", ... (" + listaAlunos.size() + " total)";
+                } else {
+                    nomes += " (" + listaAlunos.size() + " total)";
+                }
+                return new SimpleStringProperty(nomes);
+            }
+        });
 
         carregarDados();
     }
