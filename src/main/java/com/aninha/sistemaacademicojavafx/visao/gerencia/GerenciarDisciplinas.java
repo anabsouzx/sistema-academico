@@ -2,12 +2,14 @@ package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.modelo.persistencia.DAODisciplina;
+import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -18,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GerenciarDisciplinas implements Initializable {
+
     @FXML
     private TableColumn<Disciplina, Integer> colunaCargaH;
 
@@ -36,13 +39,15 @@ public class GerenciarDisciplinas implements Initializable {
     @FXML
     private TableView<Disciplina> tableDisciplinas;
 
-    @FXML
-    void inserirDisciplina(ActionEvent event) throws IOException{
-        carregarTela("insert/inserir-disciplina.fxml");
+    private DAODisciplina daoDisciplina;
+
+    public GerenciarDisciplinas() {
+        this.daoDisciplina = new DAODisciplina();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Mapeamento das colunas com os atributos da classe Disciplina
         colunaCodigoD.setCellValueFactory(new PropertyValueFactory<>("codigoDisciplina"));
         colunaNomeD.setCellValueFactory(new PropertyValueFactory<>("nomeDisciplina"));
         colunaCargaH.setCellValueFactory(new PropertyValueFactory<>("cargaHoraria"));
@@ -51,13 +56,68 @@ public class GerenciarDisciplinas implements Initializable {
         carregarDados();
     }
 
-    private void carregarDados() {
+    @FXML
+    void inserirDisciplina(ActionEvent event) throws IOException {
+        carregarTela("insert/inserir-disciplina.fxml");
+    }
 
+    @FXML
+    void editarDisciplina(ActionEvent event) throws IOException {
+        Disciplina selecionada = tableDisciplinas.getSelectionModel().getSelectedItem();
+
+        if (selecionada == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para editar.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("edit/editar-disciplina.fxml"));
+            Parent telaEdicao = loader.load();
+
+            EditarDisciplina controllerEdicao = loader.getController();
+            controllerEdicao.setDisciplinaParaEditar(selecionada, this);
+
+            painelPrincipal.setCenter(telaEdicao);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Erro", "Erro ao carregar a tela de edição.", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    void excluirDisciplina(ActionEvent event) {
+        Disciplina selecionada = tableDisciplinas.getSelectionModel().getSelectedItem();
+
+        if (selecionada == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para excluir.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        daoDisciplina.excluirDisciplina(selecionada);
+        carregarDados();
+    }
+
+    public void carregarDados() {
+        ObservableList<Disciplina> lista = daoDisciplina.listarDisciplinas();
+        tableDisciplinas.setItems(lista);
+        tableDisciplinas.refresh();
+    }
+
+    public void limparPainelCentral() {
+        painelPrincipal.setCenter(null);
     }
 
     private void carregarTela(String fxmlFile) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent conteudoDaTela = fxmlLoader.load();
         painelPrincipal.setCenter(conteudoDaTela);
+    }
+
+    private void mostrarAlerta(String titulo, String cabecalho, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(cabecalho);
+        alert.showAndWait();
     }
 }
