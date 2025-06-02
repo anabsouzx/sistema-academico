@@ -51,7 +51,7 @@ public class Turma {
     public void adicionarAluno(Aluno aluno) {
         this.listaAlunos.add(aluno);
     }
-    
+
     public boolean removerAluno(Aluno aluno) {
         return this.listaAlunos.remove(aluno);
     }

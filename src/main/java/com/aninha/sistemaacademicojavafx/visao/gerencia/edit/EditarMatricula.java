@@ -31,7 +31,7 @@ public class EditarMatricula {
         this.controllerPai = controllerPai;
 
         campoNumero.setText(String.valueOf(matricula.getNumMatricula()));
-        campoCodAluno.setText(String.valueOf(matricula.getCodAluno()));
+        campoCodAluno.setText(String.valueOf(matricula.getAluno()));
         campoCodDisciplina.setText(String.valueOf(matricula.getCodDisciplina()));
         campoSemestre.setText(String.valueOf(matricula.getSemestre()));
         campoAno.setText(String.valueOf(matricula.getAno()));

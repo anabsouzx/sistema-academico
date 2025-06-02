@@ -38,6 +38,11 @@ public class InserirMatricula implements Initializable {
     private DAOMatricula daoMatricula;
     private DAODisciplina daoDisciplina;
 
+    public InserirMatricula(){
+        this.daoAluno = new DAOAluno();
+        this.daoDisciplina = new DAODisciplina();
+    }
+
     @FXML
     void insereMatricula(ActionEvent event) {
         int num=0;
@@ -51,11 +56,9 @@ public class InserirMatricula implements Initializable {
         }
 
         // conversao de dados para inteiro
-        int codAluno, codDisc, smt, ano;
+        int smt, ano;
 
         try {
-            codAluno = alunoSelecionado.getCodigoAluno();
-            codDisc = disciplinaSelecionada.getCodigoDisciplina();
             smt = Integer.parseInt(smtStr);
             ano = Integer.parseInt(anoStr);
         } catch (NumberFormatException e) {
@@ -63,32 +66,23 @@ public class InserirMatricula implements Initializable {
             return;
         }
 
-        Matricula matricula = new Matricula(num,codAluno,codDisc,smt,ano);
+        Matricula matricula = new Matricula(num,alunoSelecionado,disciplinaSelecionada,smt,ano);
         //Conexao conexao = null;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*
-        Conexao c = new Conexao();
-        daoAluno = new DAOAluno(c.getConexao());
-        daoMatricula = new DAOMatricula(c.getConexao());
-        daoDisciplina = new DAODisciplina(c.getConexao());
-
         popularComboBoxAlunos();
-        popularComboBoxDisc();
-        */
     }
 
     private void popularComboBoxAlunos() {
-        /*
         ObservableList<Aluno> alunos = daoAluno.listarTodosAlunosParaComboBox();
         comboBoxAluno.setItems(alunos);
 
         comboBoxAluno.setConverter(new StringConverter<Aluno>() {
             @Override
             public String toString(Aluno aluno) {
-                return aluno == null ? "" : aluno.getNomeAluno() + " (ID: " + aluno.getCodigoAluno() + ")";
+                return aluno == null ? "" : aluno.getNome() + " (ID: " + aluno.getCodigoAluno() + ")";
             }
 
             @Override
@@ -97,12 +91,11 @@ public class InserirMatricula implements Initializable {
                     return null;
                 }
                 return comboBoxAluno.getItems().stream()
-                        .filter(aluno -> (aluno.getNomeAluno() + " (ID: " + aluno.getCodigoAluno() + ")").equals(string))
+                        .filter(aluno -> (aluno.getNome() + " (ID: " + aluno.getCodigoAluno() + ")").equals(string))
                         .findFirst()
                         .orElse(null);
             }
         });
-        */
     }
 
     private void popularComboBoxDisc() {
