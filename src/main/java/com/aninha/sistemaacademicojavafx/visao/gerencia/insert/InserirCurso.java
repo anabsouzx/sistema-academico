@@ -22,6 +22,10 @@ public class InserirCurso {
 
     DAOCurso daoCurso;
 
+    public InserirCurso(){
+        this.daoCurso = new DAOCurso();
+    }
+
     @FXML
     void insereCurso(ActionEvent event) {
         String nome = txtNomeC.getText();

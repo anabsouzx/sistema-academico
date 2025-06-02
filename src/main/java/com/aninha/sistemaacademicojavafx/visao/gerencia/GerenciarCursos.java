@@ -33,10 +33,10 @@ public class GerenciarCursos implements Initializable {
 
     // Colunas da tabela
     @FXML
-    private TableColumn<Curso, Integer> colunaCodigo;
+    private TableColumn<Curso, Integer> colunaCodigoC;
 
     @FXML
-    private TableColumn<Curso, String> colunaNome;
+    private TableColumn<Curso, String> colunaNomeC;
 
     @FXML
     private TableColumn<Curso, Integer> colunaDuracao;
@@ -109,8 +109,8 @@ public class GerenciarCursos implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Associa as colunas da tabela às propriedades da classe Curso
-        colunaCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoCurso"));
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nomeCurso"));
+        colunaCodigoC.setCellValueFactory(new PropertyValueFactory<>("codigoCurso"));
+        colunaNomeC.setCellValueFactory(new PropertyValueFactory<>("nomeCurso"));
         colunaDuracao.setCellValueFactory(new PropertyValueFactory<>("duracao"));
 
         // Carrega os dados na tabela

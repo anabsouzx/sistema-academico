@@ -101,7 +101,7 @@ public class GerenciarMatriculas implements Initializable {
         }
 
         // Exclui a matrícula e atualiza a tabela
-        daoMatricula.excluirMatricula(matriculaSelecionada);
+        //daoMatricula.excluirMatricula(matriculaSelecionada);
         carregarDados();
     }
 

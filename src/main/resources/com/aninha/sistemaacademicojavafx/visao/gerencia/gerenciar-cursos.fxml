@@ -32,11 +32,11 @@
                 </GridPane>
             </top>
             <center>
-                <TableView fx:id="tableCurso" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                <TableView fx:id="tableCursos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <columns>
-                        <TableColumn fx:id="colunacodigoCurso" prefWidth="120.0" text="Código Curso" />
-                        <TableColumn fx:id="colunanomeCurso" prefWidth="200.0" text="Nome do Curso" />
-                        <TableColumn fx:id="colunaduracao" prefWidth="120.0" text="Duração (semestres)" />
+                        <TableColumn fx:id="colunaCodigoC" prefWidth="120.0" text="Código Curso" />
+                        <TableColumn fx:id="colunaNomeC" prefWidth="200.0" text="Nome do Curso" />
+                        <TableColumn fx:id="colunaDuracao" prefWidth="120.0" text="Duração (semestres)" />
                     </columns>
                 </TableView>
             </center>
