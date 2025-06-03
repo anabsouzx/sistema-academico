@@ -32,4 +32,20 @@ public class DAOAluno {
         alunos.clear();
         proximoCodigoAluno = 1;
     }
+
+    public boolean atualizarAluno(Aluno alunoAtualizado) {
+        if (alunoAtualizado == null) {
+            return false;
+        }
+        for (int i = 0; i < alunos.size(); i++) {
+            Aluno alunoExistente = alunos.get(i);
+            if (alunoExistente.getCodigoAluno() == alunoAtualizado.getCodigoAluno()) {
+                // Atualiza os campos do aluno existente com os novos valores
+                // Ou simplesmente substitui o objeto, já que o código não muda
+                alunos.set(i, alunoAtualizado);
+                return true;
+            }
+        }
+        return false; // Aluno não encontrado
+    }
 }

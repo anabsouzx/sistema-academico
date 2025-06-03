@@ -1,5 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 
+import com.aninha.sistemaacademicojavafx.controller.DAOAluno;
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarAlunos; // Para poder chamar um método de recarregar
 import javafx.event.ActionEvent;
@@ -9,6 +10,9 @@ import javafx.scene.control.TextField;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class EditarAluno {
     @FXML
@@ -22,6 +26,13 @@ public class EditarAluno {
 
     private Aluno alunoParaEditar;
     private GerenciarAlunos controllerGerenciador; // Para chamar o refresh da tabela principal
+    private DAOAluno daoAluno; // interagir com dados
+
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    public EditarAluno(){
+        this.daoAluno = new DAOAluno();
+    }
 
     public void setAlunoParaEditar(Aluno aluno, GerenciarAlunos controllerGerenciador) {
         this.alunoParaEditar = aluno;
@@ -30,16 +41,16 @@ public class EditarAluno {
     }
 
     private void popularCampos() {
-        /*if (alunoParaEditar != null) {
-            txtNomeA.setText(alunoParaEditar.getNomeAluno());
-            // formatar a data para exibição dd/MM/yyyy
-            if (alunoParaEditar.getDataNasc() != null) {
-                SimpleDateFormat sdfExibicao = new SimpleDateFormat("dd/MM/yyyy");
-                txtData.setText(sdfExibicao.format(alunoParaEditar.getDataNasc()));
+        if (alunoParaEditar != null) {
+            txtNomeA.setText(alunoParaEditar.getNome());
+            if (alunoParaEditar.getDataDeNascimento() != null) {
+                txtData.setText(alunoParaEditar.getDataDeNascimento().format(dateFormatter));
+            } else {
+                txtData.setText("");
             }
             txtCpf.setText(alunoParaEditar.getCpf());
             txtTel.setText(alunoParaEditar.getTelefone());
-        }*/
+        }
     }
 
     @FXML
@@ -50,48 +61,35 @@ public class EditarAluno {
         String tel = txtTel.getText();
 
         if (nome.isEmpty() || dataStr.isEmpty() || cpf.isEmpty() || tel.isEmpty()) {
-            mostrarAlerta("Conteúdo vazio", "Todos os campos precisam ser preenchidos", Alert.AlertType.WARNING);
+            mostrarAlerta("Campos Vazios", "Todos os campos precisam ser preenchidos.", Alert.AlertType.WARNING);
             return;
         }
 
-        java.sql.Date dataSql = null;
-        SimpleDateFormat sdfParse = new SimpleDateFormat("dd/MM/yyyy");
-        sdfParse.setLenient(false);
+        LocalDate dataDeNascimento = null;
         try {
-            java.util.Date utilDate = sdfParse.parse(dataStr);
-            dataSql = new java.sql.Date(utilDate.getTime());
-        } catch (ParseException e) {
-            mostrarAlerta("Data Incorreta", "Formato correto: dd/MM/yyyy", Alert.AlertType.ERROR);
+            dataDeNascimento = LocalDate.parse(dataStr, dateFormatter);
+        } catch (DateTimeParseException e) {
+            mostrarAlerta("Data Inválida", "O formato da data deve ser dd/MM/yyyy.", Alert.AlertType.ERROR);
             txtData.requestFocus();
             return;
         }
 
-        //alunoParaEditar.setNomeAluno(nome);
-        //alunoParaEditar.setDataNasc(dataSql);
-        //alunoParaEditar.setCpf(cpf);
-        //alunoParaEditar.setTelefone(tel);
+        // Atualiza o objeto alunoParaEditar com os novos dados
+        alunoParaEditar.setNome(nome);
+        alunoParaEditar.setDataDeNascimento(dataDeNascimento);
+        alunoParaEditar.setCpf(cpf);
+        alunoParaEditar.setTelefone(tel);
 
-        /*Conexao conexao = null;
-        try {
-            conexao = new Conexao();
-            DAOAluno daoAluno = new DAOAluno(conexao.getConexao());
-            if (daoAluno.atualizarAluno(alunoParaEditar)) {
-                mostrarAlerta("Sucesso", "Aluno atualizado com sucesso!", Alert.AlertType.INFORMATION);
-                if (controllerGerenciador != null) {
-                    controllerGerenciador.carregarDados();
-                }
-                fecharTelaDeEdicao();
-            } else {
-                mostrarAlerta("Erro", "Não foi possível atualizar o aluno.", Alert.AlertType.ERROR);
+        // Tenta atualizar o aluno usando o DAO
+        if (daoAluno.atualizarAluno(alunoParaEditar)) {
+            mostrarAlerta("Sucesso", "Aluno atualizado com sucesso!", Alert.AlertType.INFORMATION);
+            if (controllerGerenciador != null) {
+                controllerGerenciador.carregarDados(); // Atualiza a tabela na tela principal
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            mostrarAlerta("Erro Crítico", "Ocorreu um erro inesperado.", Alert.AlertType.ERROR);
-        } finally {
-            if (conexao != null) {
-                conexao.fecharConexao();
-            }
-        }*/
+            fecharTelaDeEdicao(); // Fecha a tela de edição
+        } else {
+            mostrarAlerta("Erro", "Não foi possível atualizar o aluno. Aluno não encontrado.", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -100,10 +98,6 @@ public class EditarAluno {
     }
 
     private void fecharTelaDeEdicao() {
-        // Para fechar a tela, assumindo que ela está no centro de um BorderPane no GerenciarAlunos
-        // Precisamos de uma referência ao painel principal de GerenciarAlunos,
-        // ou uma maneira mais robusta de gerenciar as telas.
-        // Uma forma simples é o controllerGerenciador limpar o centro do seu painel.
         if (controllerGerenciador != null) {
             controllerGerenciador.limparPainelCentral(); // Método a ser criado
         }

@@ -3,7 +3,6 @@ package com.aninha.sistemaacademicojavafx.modelo;
 import java.time.LocalDate;
 
 public abstract class Pessoa {
-    int codigo;
     String nome;
     LocalDate dataDeNascimento;
     String cpf;
