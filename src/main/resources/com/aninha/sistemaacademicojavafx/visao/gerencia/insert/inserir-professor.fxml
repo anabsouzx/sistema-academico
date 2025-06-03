@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aninha.sistemaacademicojavafx.visao.gerencia.insert.InserirProfessor">
-   <children>
-      <Button layoutX="274.0" layoutY="188.0" mnemonicParsing="false" text="Button" />
-   </children>
-</AnchorPane>
+<BorderPane fx:id="painelPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aninha.sistemaacademicojavafx.visao.gerencia.insert.InserirProfessor">
+   <center>
+      <VBox prefHeight="400.0" prefWidth="191.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Nome do Professor">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="txtNomeP" prefHeight="25.0" prefWidth="590.0" promptText="claudinho uchiha" />
+            <Label text="Data de Nascimento" />
+            <TextField fx:id="txtData" promptText="06/09/1996" />
+            <Label text="CPF" />
+            <TextField fx:id="txtCpf" promptText="123.456.789-00" />
+            <Label text="Telefone" />
+            <TextField fx:id="txtTel" promptText="(11) 99999-9999" />
+            <Button mnemonicParsing="false" onAction="#insereProf" text="Inserir">
+               <VBox.margin>
+                  <Insets left="70.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="200.0" right="200.0" top="100.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

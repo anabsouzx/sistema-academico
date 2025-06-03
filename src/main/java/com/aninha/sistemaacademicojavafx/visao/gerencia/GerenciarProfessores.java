@@ -64,7 +64,7 @@ public class GerenciarProfessores implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colunaCodigoP.setCellValueFactory(new PropertyValueFactory<>("codigoAluno"));
+        colunaCodigoP.setCellValueFactory(new PropertyValueFactory<>("codigoProfessor"));
         colunaNomeP.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colunaData.setCellValueFactory(new PropertyValueFactory<>("dataDeNascimento"));
         colunaCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));

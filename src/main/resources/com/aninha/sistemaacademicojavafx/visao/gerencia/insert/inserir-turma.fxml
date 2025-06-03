@@ -23,7 +23,7 @@
         </VBox>
     </top>
     <center>
-        <GridPane hgap="10" vgap="15" BorderPane.alignment="TOP_CENTER">
+        <GridPane hgap="10" vgap="20" BorderPane.alignment="TOP_CENTER">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
             </padding>
@@ -34,7 +34,10 @@
             <Label text="Disciplina:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <ComboBox fx:id="comboBoxDisciplina" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-            <Label text="Alunos Disponíveis:" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" />
+            <Label text="Alunos Disponíveis:" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+                <GridPane.margin>
+                    <Insets top="5.0" /> </GridPane.margin>
+            </Label>
             <Label text="(Segure Ctrl/Cmd para selecionar múltiplos)" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" style="-fx-font-size: 10px;"/>
 
             <ListView fx:id="listViewAlunos" prefHeight="250.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
@@ -44,12 +47,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
-            </rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" /> <RowConstraints minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" /> </rowConstraints>
 
         </GridPane>
     </center>

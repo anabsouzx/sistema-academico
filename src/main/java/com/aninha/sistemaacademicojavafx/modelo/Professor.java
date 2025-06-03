@@ -6,7 +6,7 @@ import java.time.LocalDate; // Importa a classe para trabalhar com datas (ex: da
 public class Professor extends Pessoa {
 
     // Código único do professor (serve como identificador)
-    private int CodigoProfessor;
+    private int codigoProfessor;
 
     // Construtor da classe, recebe dados básicos e passa para o construtor da superclasse Pessoa
     public Professor(String nome, LocalDate dataDeNascimento, String cpf, String telefone) {
@@ -15,12 +15,12 @@ public class Professor extends Pessoa {
 
     // Getter: retorna o código do professor
     public int getCodigoProfessor() {
-        return CodigoProfessor;
+        return codigoProfessor;
     }
 
     // Setter: define o código do professor
-    public void setCodigoProfessor(int CodigoProfessor) {
-        this.CodigoProfessor = CodigoProfessor;
+    public void setCodigoProfessor(int codigoProfessor) {
+        this.codigoProfessor = codigoProfessor;
     }
 
     // Método sobrescrito que retorna um resumo dos dados do professor
