@@ -48,7 +48,7 @@ public class Matricula {
     }
 
     // Retorna a disciplina da matrícula
-    public Disciplina getCodDisciplina() {
+    public Disciplina getDisciplina() {
         return disciplina;
     }
 

@@ -2,9 +2,12 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 // Importações necessárias
+import com.aninha.sistemaacademicojavafx.modelo.Aluno;
+import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarMatricula;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,10 +40,10 @@ public class GerenciarMatriculas implements Initializable {
     private TableColumn<Matricula, Integer> colunaNumero;
 
     @FXML
-    private TableColumn<Matricula, Integer> colunaCodA;
+    private TableColumn<Matricula, String> colunaCodA;
 
     @FXML
-    private TableColumn<Matricula, Integer> colunaCodDisc;
+    private TableColumn<Matricula, String> colunaCodDisc;
 
     @FXML
     private TableColumn<Matricula, Integer> colunaSemestre;
@@ -116,9 +119,28 @@ public class GerenciarMatriculas implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Associa as colunas da tabela às propriedades da classe Matricula
         colunaNumero.setCellValueFactory(new PropertyValueFactory<>("numMatricula"));
-        colunaCodA.setCellValueFactory(new PropertyValueFactory<>("codigoAlunoProperty")); // Usando o novo getter
-        colunaCodDisc.setCellValueFactory(new PropertyValueFactory<>("nomeAluno"));
-        //colunaCodDisc.setCellValueFactory(new PropertyValueFactory<>("codDisciplina"));
+
+        // Coluna para "Nome do Aluno (ID: X)"
+        colunaCodA.setCellValueFactory(cellDataFeatures -> {
+            Matricula matricula = cellDataFeatures.getValue();
+            Aluno aluno = matricula.getAluno();
+            if (aluno != null) {
+                return new SimpleStringProperty(aluno.info());
+            }
+            return new SimpleStringProperty("Aluno não especificado");
+        });
+
+        // Coluna para "Nome da Disciplina (ID: Y)"
+        colunaCodDisc.setCellValueFactory(cellDataFeatures -> {
+            Matricula matricula = cellDataFeatures.getValue();
+            Disciplina disciplina = matricula.getDisciplina(); // Pega o objeto Disciplina diretamente
+            if (disciplina != null) {
+                // Disciplina tem getNomeDisciplina() e getCodigoDisciplina()
+                return new SimpleStringProperty(disciplina.getNomeDisciplina() + " (ID: " + disciplina.getCodigoDisciplina() + ")");
+            }
+            return new SimpleStringProperty("Disciplina não especificada");
+        });
+
         colunaSemestre.setCellValueFactory(new PropertyValueFactory<>("semestre"));
         colunaAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
 

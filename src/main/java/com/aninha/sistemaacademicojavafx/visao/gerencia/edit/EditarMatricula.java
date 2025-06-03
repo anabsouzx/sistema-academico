@@ -32,7 +32,7 @@ public class EditarMatricula {
 
         campoNumero.setText(String.valueOf(matricula.getNumMatricula()));
         campoCodAluno.setText(String.valueOf(matricula.getAluno()));
-        campoCodDisciplina.setText(String.valueOf(matricula.getCodDisciplina()));
+        campoCodDisciplina.setText(String.valueOf(matricula.getDisciplina()));
         campoSemestre.setText(String.valueOf(matricula.getSemestre()));
         campoAno.setText(String.valueOf(matricula.getAno()));
     }
