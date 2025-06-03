@@ -4,7 +4,9 @@ import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
+import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +30,7 @@ public class GerenciarDisciplinas implements Initializable {
     private TableColumn<Disciplina, Integer> colunaCargaH;
 
     @FXML
-    private TableColumn<Disciplina, Integer> colunaCodigoC;
+    private TableColumn<Disciplina, String> colunaCodigoC;
 
     @FXML
     private TableColumn<Disciplina, Integer> colunaCodigoD;
@@ -54,7 +56,17 @@ public class GerenciarDisciplinas implements Initializable {
         colunaCodigoD.setCellValueFactory(new PropertyValueFactory<>("codigoDisciplina"));
         colunaNomeD.setCellValueFactory(new PropertyValueFactory<>("nomeDisciplina"));
         colunaCargaH.setCellValueFactory(new PropertyValueFactory<>("cargaHoraria"));
-        colunaCodigoC.setCellValueFactory(new PropertyValueFactory<>("codCurso"));
+
+        // coluna codigo curso
+        colunaCodigoC.setCellValueFactory(cellDataFeatures -> {
+            Disciplina disciplina = cellDataFeatures.getValue();
+            Curso curso = disciplina.getCurso(); // Pega o objeto Disciplina diretamente
+            if (curso != null) {
+                // Disciplina tem getNomeDisciplina() e getCodigoDisciplina()
+                return new SimpleStringProperty(curso.getNomeCurso() + " (ID: " + curso.getCodigoCurso() + ")");
+            }
+            return new SimpleStringProperty("Curso não especificado");
+        });
 
         carregarDados();
     }

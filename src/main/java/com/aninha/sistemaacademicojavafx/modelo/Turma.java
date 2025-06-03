@@ -13,18 +13,20 @@ public class Turma {
     private int semestre;
 
     // Construtor com ano e semestre incluídos
-    public Turma(int codigoTurma, Disciplina disciplina, Professor professor, ArrayList<Aluno> listaAlunos, int ano, int semestre) {
-        this.codigoTurma = codigoTurma;
+    //public Turma(int codigoTurma, Disciplina disciplina, Professor professor, ArrayList<Aluno> listaAlunos, int ano, int semestre) {
+    //    this.codigoTurma = codigoTurma;
+    //    this.disciplina = disciplina;
+    //    this.professor = professor;
+    //    this.listaAlunos = listaAlunos;
+    //    this.ano = ano;
+    //    this.semestre = semestre;
+    //}
+
+    // Construtor alternativo, caso ainda não use ano/semestre na criação
+    public Turma(Disciplina disciplina, Professor professor, ArrayList<Aluno> listaAlunos) {
         this.disciplina = disciplina;
         this.professor = professor;
         this.listaAlunos = listaAlunos;
-        this.ano = ano;
-        this.semestre = semestre;
-    }
-
-    // Construtor alternativo, caso ainda não use ano/semestre na criação
-    public Turma(int codigoTurma, Disciplina disciplina, Professor professor, ArrayList<Aluno> listaAlunos) {
-        this(codigoTurma, disciplina, professor, listaAlunos, 0, 0); // ano e semestre padrão 0
     }
 
     public int getCodigoTurma() {
