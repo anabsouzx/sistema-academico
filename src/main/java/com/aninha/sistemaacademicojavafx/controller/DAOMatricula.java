@@ -4,10 +4,7 @@ import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- * Classe DAO (Data Access Object) responsável pelo gerenciamento de matrículas.
- * Armazena dados em memória sem uso de banco de dados.
- */
+
 public class DAOMatricula {
 
     // Lista que armazena todas as matrículas em memória
@@ -21,39 +18,41 @@ public class DAOMatricula {
         // Pode ser usado para carregar dados iniciais, se necessário
     }
 
-    /**
-     * Retorna a lista completa de matrículas cadastradas.
-     *
-     * @return lista de objetos Matricula
-     */
+    // Retorna a lista completa de matrículas cadastradas.
+
     public ObservableList<Matricula> listarMatriculas() {
         return matriculas;
     }
 
-    /**
-     * Adiciona uma nova matrícula à lista com número gerado automaticamente.
-     *
-     * @param m matrícula a ser adicionada
-     */
+    // Adiciona uma nova matrícula à lista com número gerado automaticamente.
+
     public void adicionar(Matricula m) {
         m.setNumMatricula(proximoNumeroMatricula++);
         matriculas.add(m);
     }
 
-    /**
-     * Remove uma matrícula específica da lista.
-     *
-     * @param matricula matrícula a ser removida
-     */
+    // Remove uma matrícula específica da lista.
     public void excluirMatricula(Matricula matricula) {
         matriculas.remove(matricula);
     }
 
-    /**
-     * Remove todas as matrículas da lista e reinicia o contador de número de matrícula.
-     */
+    // Remove todas as matrículas da lista e reinicia o contador de número de matrícula.
+
     public void apagarTudo() {
         matriculas.clear();
         proximoNumeroMatricula = 1;
     }
+
+
+    // Busca uma matrícula pelo número.
+
+    public Matricula buscarPorNumero(int numero) {
+        for (Matricula m : matriculas) {
+            if (m != null && m.getNumMatricula() == numero) {
+                return m;
+            }
+        }
+        return null;
+    }
+
 }

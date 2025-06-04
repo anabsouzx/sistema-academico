@@ -54,4 +54,15 @@ public class DAODisciplina {
         disciplinas.clear();
         proximoCodigoDisciplina = 1;
     }
+
+    public Disciplina buscarPorCodigo(int codigo) {
+        for (Disciplina d : disciplinas) {
+            if (d.getCodigoDisciplina() == codigo) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+
 }

@@ -3,6 +3,7 @@ package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
+import com.aninha.sistemaacademicojavafx.controller.DAOCurso;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarDisciplinas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,24 +23,32 @@ public class EditarDisciplina {
 
     private Disciplina disciplinaParaEditar;
     private GerenciarDisciplinas controllerGerenciador;
+    private DAODisciplina daoDisciplina;
+    private DAOCurso daoCurso;
 
-    // Método chamado pela tela de gerenciamento ao abrir a edição
+    public EditarDisciplina() {
+        this.daoDisciplina = new DAODisciplina();
+        this.daoCurso = new DAOCurso();
+    }
+
     public void setDisciplinaParaEditar(Disciplina disciplina, GerenciarDisciplinas controllerGerenciador) {
         this.disciplinaParaEditar = disciplina;
         this.controllerGerenciador = controllerGerenciador;
         popularCampos();
     }
 
-    // Preenche os campos com os dados atuais da disciplina
     private void popularCampos() {
         if (disciplinaParaEditar != null) {
             txtNomeDisciplina.setText(disciplinaParaEditar.getNomeDisciplina());
             txtCargaHoraria.setText(String.valueOf(disciplinaParaEditar.getCargaHoraria()));
-            txtCodCurso.setText(String.valueOf(disciplinaParaEditar.getCurso()));
+            if (disciplinaParaEditar.getCurso() != null) {
+                txtCodCurso.setText(String.valueOf(disciplinaParaEditar.getCurso().getCodigoCurso()));
+            } else {
+                txtCodCurso.setText("");
+            }
         }
     }
 
-    // Ação do botão "Atualizar"
     @FXML
     void atualizaDisciplinaAction(ActionEvent event) {
         String nome = txtNomeDisciplina.getText();
@@ -52,46 +61,56 @@ public class EditarDisciplina {
         }
 
         int cargaHoraria;
-        Curso curso = null;
-
         try {
             cargaHoraria = Integer.parseInt(cargaStr);
-
         } catch (NumberFormatException e) {
-            mostrarAlerta("Erro de formato", "Carga horária deve ser um número inteiros.", Alert.AlertType.ERROR);
+            mostrarAlerta("Erro de formato", "Carga horária deve ser um número inteiro.", Alert.AlertType.ERROR);
+            txtCargaHoraria.requestFocus();
             return;
         }
 
-        // Atualiza os dados na instância
+        int codigoCurso;
+        try {
+            codigoCurso = Integer.parseInt(codCursoStr);
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Erro de formato", "Código do curso deve ser um número inteiro.", Alert.AlertType.ERROR);
+            txtCodCurso.requestFocus();
+            return;
+        }
+
+        Curso curso = daoCurso.buscarPorCodigo(codigoCurso);
+        if (curso == null) {
+            mostrarAlerta("Curso não encontrado", "Nenhum curso foi encontrado com o código informado.", Alert.AlertType.ERROR);
+            txtCodCurso.requestFocus();
+            return;
+        }
+
         disciplinaParaEditar.setNomeDisciplina(nome);
         disciplinaParaEditar.setCargaHoraria(cargaHoraria);
         disciplinaParaEditar.setCurso(curso);
 
-        // Atualiza no DAO
-        DAODisciplina dao = new DAODisciplina();
-        if (dao.atualizarDisciplina(disciplinaParaEditar)) {
+        if (daoDisciplina.atualizarDisciplina(disciplinaParaEditar)) {
             mostrarAlerta("Sucesso", "Disciplina atualizada com sucesso!", Alert.AlertType.INFORMATION);
-            controllerGerenciador.carregarDados();
+            if (controllerGerenciador != null) {
+                controllerGerenciador.carregarDados();
+            }
             fecharTelaDeEdicao();
         } else {
             mostrarAlerta("Erro", "Falha ao atualizar a disciplina.", Alert.AlertType.ERROR);
         }
     }
 
-    // Ação do botão "Cancelar"
     @FXML
     void cancelarAction(ActionEvent event) {
         fecharTelaDeEdicao();
     }
 
-    // Fecha a tela limpando o painel central
     private void fecharTelaDeEdicao() {
         if (controllerGerenciador != null) {
             controllerGerenciador.limparPainelCentral();
         }
     }
 
-    // Método utilitário para exibir alertas
     private void mostrarAlerta(String titulo, String mensagem, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);

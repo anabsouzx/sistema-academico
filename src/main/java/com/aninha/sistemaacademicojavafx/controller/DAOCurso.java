@@ -54,4 +54,22 @@ public class DAOCurso {
         cursos.clear();
         proximoCodigoCurso = 1;
     }
+
+    public Curso buscarPorCodigo(int codigo) {
+        // Verifica se a lista existe
+        if (cursos != null) {
+            // Percorre cada curso na lista
+            for (Curso curso : cursos) {
+                // Checa se o objeto curso não é nulo e se o código confere
+                if (curso != null && curso.getCodigoCurso() == codigo) {
+                    return curso; // retorna o curso encontrado
+                }
+            }
+        }
+        // Se não encontrou, retorna null
+        return null;
+    }
+
+
+
 }

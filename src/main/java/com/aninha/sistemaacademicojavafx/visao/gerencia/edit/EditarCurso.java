@@ -18,6 +18,11 @@ public class EditarCurso {
 
     private Curso cursoParaEditar;
     private GerenciarCursos controllerGerenciador;
+    private DAOCurso daoCurso;
+
+    public EditarCurso() {
+        this.daoCurso = new DAOCurso();
+    }
 
     // Método chamado pelo GerenciarCursos para carregar os dados do curso selecionado
     public void setCursoParaEditar(Curso curso, GerenciarCursos controllerGerenciador) {
@@ -50,21 +55,21 @@ public class EditarCurso {
             duracao = Integer.parseInt(duracaoStr);
         } catch (NumberFormatException e) {
             mostrarAlerta("Duração inválida", "A duração deve ser um número inteiro.", Alert.AlertType.ERROR);
+            txtDuracao.requestFocus();
             return;
         }
 
         cursoParaEditar.setNomeCurso(nome);
         cursoParaEditar.setDuracao(duracao);
 
-        DAOCurso daoCurso = new DAOCurso();
         if (daoCurso.atualizarCurso(cursoParaEditar)) {
             mostrarAlerta("Sucesso", "Curso atualizado com sucesso!", Alert.AlertType.INFORMATION);
             if (controllerGerenciador != null) {
-                controllerGerenciador.carregarDados();
+                controllerGerenciador.carregarDados(); // Atualiza a tabela
             }
             fecharTelaDeEdicao();
         } else {
-            mostrarAlerta("Erro", "Não foi possível atualizar o curso.", Alert.AlertType.ERROR);
+            mostrarAlerta("Erro", "Não foi possível atualizar o curso. Curso não encontrado.", Alert.AlertType.ERROR);
         }
     }
 
@@ -77,7 +82,7 @@ public class EditarCurso {
     // Fecha a tela de edição limpando o painel central
     private void fecharTelaDeEdicao() {
         if (controllerGerenciador != null) {
-            controllerGerenciador.limparPainelCentral();
+            controllerGerenciador.limparPainelCentral(); // Deve existir no GerenciarCursos
         }
     }
 
