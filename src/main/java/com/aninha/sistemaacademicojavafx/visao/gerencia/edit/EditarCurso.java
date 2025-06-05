@@ -24,7 +24,7 @@ public class EditarCurso {
         this.daoCurso = new DAOCurso();
     }
 
-    // Método chamado pelo GerenciarCursos para carregar os dados do curso selecionado
+    // Metodo chamado pelo GerenciarCursos para carregar os dados do curso selecionado
     public void setCursoParaEditar(Curso curso, GerenciarCursos controllerGerenciador) {
         this.cursoParaEditar = curso;
         this.controllerGerenciador = controllerGerenciador;

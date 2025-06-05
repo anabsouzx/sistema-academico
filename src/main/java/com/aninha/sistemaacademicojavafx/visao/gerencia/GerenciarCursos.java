@@ -149,4 +149,24 @@ public class GerenciarCursos implements Initializable {
         alert.setHeaderText(cabecalho);
         alert.showAndWait();
     }
+    public void abrirTelaEditarCurso(Curso cursoSelecionado) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/aninha/sistemaacademicojavafx/visao/gerencia/edit/editar-curso.fxml"));
+            Parent root = loader.load();
+
+            EditarCurso editarCursoController = loader.getController();
+            editarCursoController.setCursoParaEditar(cursoSelecionado, this);
+
+            exibirNoPainelCentral(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void exibirNoPainelCentral(Parent tela) {
+        painelPrincipal.setCenter(tela);
+    }
+    
+
+
 }
