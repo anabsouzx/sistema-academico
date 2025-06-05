@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,6 +48,10 @@ public class GerenciarDisciplinas implements Initializable {
     private DAOMatricula daoMatricula;
     private DAOTurma daoTurma;
 
+    @FXML
+    private ComboBox<Curso> comboCursos;
+
+
     public GerenciarDisciplinas() {
         this.daoDisciplina = new DAODisciplina();
         this.daoMatricula = new DAOMatricula();
@@ -80,7 +85,7 @@ public class GerenciarDisciplinas implements Initializable {
     }
 
     @FXML
-    void editarDisciplina(ActionEvent event) throws IOException {
+    void editarDisciplina(ActionEvent event) {
         Disciplina selecionada = tableDisciplinas.getSelectionModel().getSelectedItem();
 
         if (selecionada == null) {
@@ -88,20 +93,9 @@ public class GerenciarDisciplinas implements Initializable {
             return;
         }
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("edit/editar-disciplina.fxml"));
-            Parent telaEdicao = loader.load();
-
-            EditarDisciplina controllerEdicao = loader.getController();
-            controllerEdicao.setDisciplinaParaEditar(selecionada, this);
-
-            painelPrincipal.setCenter(telaEdicao);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Erro", "Erro ao carregar a tela de edição.", Alert.AlertType.ERROR);
-        }
+        abrirTelaEditarDisciplina(selecionada);
     }
+
 
     @FXML
     void excluirDisciplina(ActionEvent event) {
@@ -169,4 +163,23 @@ public class GerenciarDisciplinas implements Initializable {
         alert.setHeaderText(cabecalho);
         alert.showAndWait();
     }
+    public void abrirTelaEditarDisciplina(Disciplina disciplinaSelecionada) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/aninha/sistemaacademicojavafx/visao/gerencia/edit/editar-disciplina.fxml"));
+            Parent root = loader.load();
+
+            EditarDisciplina editarDisciplinaController = loader.getController();
+            editarDisciplinaController.setDisciplinaParaEditar(disciplinaSelecionada, this);
+
+            exibirNoPainelCentral(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void exibirNoPainelCentral(Parent tela) {
+        painelPrincipal.setCenter(tela);
+    }
+
+
 }

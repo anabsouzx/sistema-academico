@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina">
     <children>
         <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" spacing="15.0">
@@ -14,7 +15,7 @@
                 <Label text="Editar Disciplina" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
                 <TextField fx:id="txtNomeDisciplina" promptText="Nome Completo" />
                 <TextField fx:id="txtCargaHoraria" promptText="Data de Nascimento (dd/MM/yyyy)" />
-                <TextField fx:id="txtCodCurso" promptText="CPF" />
+                <ComboBox fx:id="comboCursos" promptText="Selecione um curso" />
                 <Button mnemonicParsing="false" onAction="#atualizaDisciplinaAction" text="Salvar Alterações" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
                 <Button mnemonicParsing="false" onAction="#cancelarAction" text="Cancelar" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
             </children>
