@@ -13,10 +13,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 public class EditarMatricula {
-
-    @FXML
-    private TextField campoNumero;
-
     @FXML
     private TextField campoCodAluno;
 
@@ -40,7 +36,6 @@ public class EditarMatricula {
         this.matricula = matricula;
         this.controllerPai = controllerPai;
 
-        campoNumero.setText(String.valueOf(matricula.getNumMatricula()));
         campoCodAluno.setText(String.valueOf(matricula.getAluno().getCodigoAluno()));
         campoCodDisciplina.setText(String.valueOf(matricula.getDisciplina().getCodigoDisciplina()));
         campoSemestre.setText(String.valueOf(matricula.getSemestre()));

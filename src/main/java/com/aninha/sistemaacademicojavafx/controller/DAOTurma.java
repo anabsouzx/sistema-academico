@@ -21,11 +21,6 @@ public class DAOTurma {
         return turmas;
     }
 
-    // Retorna uma cópia da lista de turmas (útil para ComboBox, etc.)
-    public ObservableList<Turma> listarTurmasComboBox() {
-        return FXCollections.observableArrayList(turmas);
-    }
-
     // Adiciona uma nova turma com código gerado automaticamente
     public void adicionar(Turma turma) {
         turma.setCodigoTurma(proximoCodigoTurma++);
@@ -41,5 +36,22 @@ public class DAOTurma {
     public void apagarTudo() {
         turmas.clear();
         proximoCodigoTurma = 1;
+    }
+
+    // metodo p atualizar turma ao editar
+    public boolean atualizarTurma(Turma turmaAtualizada) {
+        if (turmaAtualizada == null) {
+            return false;
+        }
+        for (int i = 0; i < turmas.size(); i++) {
+            Turma turmaExistente = turmas.get(i);
+            // Compara pelo código da turma, que é o identificador único
+            if (turmaExistente.getCodigoTurma() == turmaAtualizada.getCodigoTurma()) {
+                // Substitui o objeto antigo pelo novo na lista
+                turmas.set(i, turmaAtualizada);
+                return true; // Sucesso na atualização
+            }
+        }
+        return false; // Turma não encontrada
     }
 }
