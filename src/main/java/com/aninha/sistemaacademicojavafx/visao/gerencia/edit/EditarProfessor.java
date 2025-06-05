@@ -34,7 +34,7 @@ public class EditarProfessor {
         this.daoProfessor = new DAOProfessor();
     }
 
-    public void setAlunoParaEditar(Professor professor, GerenciarProfessores controllerGerenciador) {
+    public void setProfessorParaEditar(Professor professor, GerenciarProfessores controllerGerenciador) {
         this.professorParaEditar = professor;
         this.controllerGerenciador = controllerGerenciador;
         popularCampos();

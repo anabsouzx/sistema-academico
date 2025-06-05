@@ -43,7 +43,7 @@ public class GerenciarProfessores implements Initializable {
 
     @FXML
     void editarProf(ActionEvent event) throws IOException{
-
+        carregarTela("edit/editar-professor.fxml");
     }
 
     @FXML
