@@ -1,5 +1,9 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 
+import com.aninha.sistemaacademicojavafx.controller.DAOProfessor;
+import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
+import com.aninha.sistemaacademicojavafx.modelo.Professor;
+import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Turma;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarTurmas;
 import javafx.event.ActionEvent;
@@ -27,15 +31,18 @@ public class EditarTurma {
     private Turma turmaSelecionada;
     private GerenciarTurmas controllerGerenciarTurmas;
 
+    private DAOProfessor daoProfessor = new DAOProfessor();
+    private DAODisciplina daoDisciplina = new DAODisciplina();
+
     public void setTurmaParaEditar(Turma turma, GerenciarTurmas controller) {
         this.turmaSelecionada = turma;
         this.controllerGerenciarTurmas = controller;
 
-        //txtCodigoTurma.setText(String.valueOf(turma.getCodigoTurma()));
-       // txtCodigoProfessor.setText(String.valueOf(turma.getCodigoProfessor()));
-        //txtCodDisciplina.setText(String.valueOf(turma.getCodDisciplina()));
-        //txtAno.setText(String.valueOf(turma.getAno()));
-        //txtSemestre.setText(String.valueOf(turma.getSemestre()));
+        txtCodigoTurma.setText(String.valueOf(turma.getCodigoTurma()));
+        txtCodigoProfessor.setText(String.valueOf(turma.getProfessor().getCodigoProfessor()));
+        txtCodDisciplina.setText(String.valueOf(turma.getDisciplina().getCodigoDisciplina()));
+        txtAno.setText(String.valueOf(turma.getAno()));
+        txtSemestre.setText(String.valueOf(turma.getSemestre()));
     }
 
     @FXML
@@ -47,16 +54,22 @@ public class EditarTurma {
             int ano = Integer.parseInt(txtAno.getText());
             int semestre = Integer.parseInt(txtSemestre.getText());
 
+            Professor professor = daoProfessor.buscarPorCodigo(codProfessor);
+            Disciplina disciplina = daoDisciplina.buscarPorCodigo(codDisciplina);
+
+            if (professor == null || disciplina == null) {
+                mostrarAlerta("Erro", "Professor ou Disciplina não encontrados.");
+                return;
+            }
+
             turmaSelecionada.setCodigoTurma(codTurma);
-            //turmaSelecionada.setCodigoProfessor(codProfessor);
-            //turmaSelecionada.setCodDisciplina(codDisciplina);
-           // turmaSelecionada.setAno(ano);
-           // turmaSelecionada.setSemestre(semestre);
+            turmaSelecionada.setProfessor(professor);
+            turmaSelecionada.setDisciplina(disciplina);
+            turmaSelecionada.setAno(ano);
+            turmaSelecionada.setSemestre(semestre);
 
-            // Aqui você pode adicionar código para atualizar no banco de dados, se necessário
-
-            controllerGerenciarTurmas.carregarDados(); // Atualiza a tabela
-            controllerGerenciarTurmas.limparPainelCentral(); // Volta para a tela principal
+            controllerGerenciarTurmas.carregarDados();
+            controllerGerenciarTurmas.limparPainelCentral();
 
         } catch (NumberFormatException e) {
             mostrarAlerta("Erro de Formato", "Todos os campos devem ser preenchidos com números válidos.");
