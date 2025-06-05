@@ -1,7 +1,11 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
+import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
+import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.controller.DAOAluno;
+import com.aninha.sistemaacademicojavafx.modelo.Matricula;
+import com.aninha.sistemaacademicojavafx.modelo.Turma;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarAluno;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,9 +49,13 @@ public class GerenciarAlunos implements Initializable {
     private TableView<Aluno> tableAlunos;
 
     private DAOAluno daoAluno;
+    private DAOMatricula daoMatricula;
+    private DAOTurma daoTurma;
 
     public GerenciarAlunos() {
         this.daoAluno = new DAOAluno(); // Instancia o DAO
+        this.daoMatricula = new DAOMatricula();
+        this.daoTurma =  new DAOTurma();
     }
 
     @FXML
@@ -75,7 +83,58 @@ public class GerenciarAlunos implements Initializable {
 
     @FXML
     void excluirAluno(ActionEvent event) throws IOException{
+        Aluno selecionada = tableAlunos.getSelectionModel().getSelectedItem();
 
+        if (selecionada == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para excluir.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        // --- VERIFICAÇÃO ADICIONADA ---
+        // Verifica se a disciplina está sendo usada em alguma matrícula
+        boolean emUso = false;
+        for (Matricula matricula : daoMatricula.listarMatriculas()) {
+            if (matricula.getAluno() != null && matricula.getAluno().getCodigoAluno() == selecionada.getCodigoAluno()) {
+                emUso = true;
+                break; // Encontrou uma matrícula, não precisa continuar procurando
+            }
+        }
+
+        //  verificacao em turma
+        boolean estaEmTurma = false;
+        for (Turma turma : daoTurma.listarTurmas()) {
+            for (Aluno alunoDaTurma : turma.getListaAlunos()) {
+                // Compara pelo código, que é um identificador único
+                if (alunoDaTurma.getCodigoAluno() == selecionada.getCodigoAluno()) {
+                    estaEmTurma = true;
+                    break; // Encontrou o aluno, pode parar o loop interno
+                }
+            }
+            if (estaEmTurma) {
+                break; // Se já encontrou, pode parar o loop externo também
+            }
+        }
+
+        // Se o aluno estiver em uma turma, bloqueia a exclusão
+        if (estaEmTurma) {
+            mostrarAlerta("Exclusão não permitida", "Este aluno não pode ser excluído, pois está matriculado em uma turma.", Alert.AlertType.ERROR);
+        } else {
+            // Caso contrário, exclui o aluno e atualiza a tabela
+            daoAluno.excluirAluno(selecionada);
+            carregarDados();
+        }
+
+        // Se estiver em uso, impede a exclusão e avisa o usuário
+        if (emUso) {
+            mostrarAlerta("Exclusão não permitida", "Este aluno não pode ser excluído, pois existe uma matrícula em vigor.", Alert.AlertType.ERROR);
+            return;
+        }
+        // --- FIM DA VERIFICAÇÃO ---
+
+
+        // Se não estiver em uso, a exclusão é realizada normalmente
+        daoAluno.excluirAluno(selecionada);
+        carregarDados();
     }
 
     @FXML

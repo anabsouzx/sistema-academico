@@ -1,10 +1,9 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-import com.aninha.sistemaacademicojavafx.modelo.Aluno;
-import com.aninha.sistemaacademicojavafx.modelo.Curso;
-import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
+import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
+import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
+import com.aninha.sistemaacademicojavafx.modelo.*;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
-import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -45,9 +44,13 @@ public class GerenciarDisciplinas implements Initializable {
     private TableView<Disciplina> tableDisciplinas;
 
     private DAODisciplina daoDisciplina;
+    private DAOMatricula daoMatricula;
+    private DAOTurma daoTurma;
 
     public GerenciarDisciplinas() {
         this.daoDisciplina = new DAODisciplina();
+        this.daoMatricula = new DAOMatricula();
+        this.daoTurma = new DAOTurma();
     }
 
     @Override
@@ -109,6 +112,32 @@ public class GerenciarDisciplinas implements Initializable {
             return;
         }
 
+        // Verifica se a disciplina está sendo usada em alguma matrícula
+        boolean emUso = false;
+        for (Matricula matricula : daoMatricula.listarMatriculas()) {
+            if (matricula.getDisciplina() != null && matricula.getDisciplina().getCodigoDisciplina() == selecionada.getCodigoDisciplina()) {
+                emUso = true;
+                break; // Encontrou uma matrícula, não precisa continuar procurando
+            }
+        }
+
+        // verifica se a disciplina esta sendo usada em alguma turma
+        for (Turma turma : daoTurma.listarTurmas()) {
+            if (turma.getDisciplina() != null && turma.getDisciplina().getCodigoDisciplina() == selecionada.getCodigoDisciplina()) {
+                emUso = true;
+                break; // Encontrou uma turma, não precisa continuar procurando
+            }
+        }
+
+        // Se estiver em uso, impede a exclusão e avisa o usuário
+        if (emUso) {
+            mostrarAlerta("Exclusão não permitida", "Esta disciplina não pode ser excluída, pois existem alunos matriculados nela.", Alert.AlertType.ERROR);
+            return;
+        }
+        // --- FIM DA VERIFICAÇÃO ---
+
+
+        // Se não estiver em uso, a exclusão é realizada normalmente
         daoDisciplina.excluirDisciplina(selecionada);
         carregarDados();
     }

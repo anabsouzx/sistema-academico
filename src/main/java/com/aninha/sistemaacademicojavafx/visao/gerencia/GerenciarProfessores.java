@@ -1,7 +1,9 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
+import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
 import com.aninha.sistemaacademicojavafx.modelo.Professor;
 import com.aninha.sistemaacademicojavafx.controller.DAOProfessor;
+import com.aninha.sistemaacademicojavafx.modelo.Turma;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,7 +50,34 @@ public class GerenciarProfessores implements Initializable {
 
     @FXML
     void excluirProf(ActionEvent event) throws IOException{
+        Professor selecionada = tableProfessores.getSelectionModel().getSelectedItem();
 
+        if (selecionada == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para excluir.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        // --- VERIFICAÇÃO ADICIONADA ---
+        // Verifica se a disciplina está sendo usada em alguma matrícula
+        boolean emUso = false;
+        for (Turma turma : daoTurma.listarTurmas()) {
+            if (turma.getProfessor() != null && turma.getProfessor().getCodigoProfessor() == selecionada.getCodigoProfessor()) {
+                emUso = true;
+                break; // Encontrou uma matrícula, não precisa continuar procurando
+            }
+        }
+
+        // Se estiver em uso, impede a exclusão e avisa o usuário
+        if (emUso) {
+            mostrarAlerta("Exclusão não permitida", "Este aluno não pode ser excluído, pois existe uma matrícula em vigor.", Alert.AlertType.ERROR);
+            return;
+        }
+        // --- FIM DA VERIFICAÇÃO ---
+
+
+        // Se não estiver em uso, a exclusão é realizada normalmente
+        daoProfessor.excluirProfessor(selecionada);
+        carregarDados();
     }
 
     @FXML
@@ -57,9 +86,11 @@ public class GerenciarProfessores implements Initializable {
     }
 
     private DAOProfessor daoProfessor;
+    private DAOTurma daoTurma;
 
     public GerenciarProfessores() {
         this.daoProfessor = new DAOProfessor();
+        this.daoTurma = new DAOTurma();
     }
 
     @Override

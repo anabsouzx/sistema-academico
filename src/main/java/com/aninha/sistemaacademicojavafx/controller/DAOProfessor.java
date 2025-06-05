@@ -44,6 +44,10 @@ public class DAOProfessor {
         proximoCodigoProfessor = 1;
     }
 
+    public boolean excluirProfessor(Professor professor){
+        return professores.remove(professor);
+    }
+
     public boolean atualizarProfessor(Professor professorAtualizado) {
         if (professorAtualizado == null) {
             return false;

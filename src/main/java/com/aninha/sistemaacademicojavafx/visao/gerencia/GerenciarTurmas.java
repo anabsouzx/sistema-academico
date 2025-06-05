@@ -76,14 +76,15 @@ public class GerenciarTurmas implements Initializable {
 
     @FXML
     void excluirTurma(ActionEvent event) {
-        Turma turmaSelecionada = tableTurmas.getSelectionModel().getSelectedItem();
+        Turma selecionada = tableTurmas.getSelectionModel().getSelectedItem();
 
-        if (turmaSelecionada == null) {
-            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma turma para excluir.", Alert.AlertType.WARNING);
+        if (selecionada == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para excluir.", Alert.AlertType.WARNING);
             return;
         }
 
-        daoTurma.excluirTurma(turmaSelecionada);
+        // Se não estiver em uso, a exclusão é realizada normalmente
+        daoTurma.excluirTurma(selecionada);
         carregarDados();
     }
 

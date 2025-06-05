@@ -1,9 +1,11 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 //imports nescessarios
+import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.controller.DAOCurso;
+import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarCurso;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,10 +46,12 @@ public class GerenciarCursos implements Initializable {
 
     // Objeto DAO para manipular os dados dos cursos
     private DAOCurso daoCurso;
+    private DAODisciplina daoDisciplina;
 
     // Construtor: inicializa o DAO
     public GerenciarCursos() {
         this.daoCurso = new DAOCurso();
+        this.daoDisciplina = new DAODisciplina();
     }
 
     // Método executado quando o botão de "Editar" é clicado
@@ -85,17 +89,33 @@ public class GerenciarCursos implements Initializable {
     // Método chamado ao clicar no botão "Excluir"
     @FXML
     void excluirCurso(ActionEvent event) {
-        // Pega o curso selecionado
-        Curso cursoSelecionado = tableCursos.getSelectionModel().getSelectedItem();
+        Curso selecionada = tableCursos.getSelectionModel().getSelectedItem();
 
-        // Verifica se nada foi selecionado
-        if (cursoSelecionado == null) {
-            mostrarAlerta("Seleção Necessária", "Por favor, selecione um curso para excluir.", Alert.AlertType.WARNING);
+        if (selecionada == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para excluir.", Alert.AlertType.WARNING);
             return;
         }
 
-        // Exclui o curso e atualiza a tabela
-        daoCurso.excluirCurso(cursoSelecionado);
+        // --- VERIFICAÇÃO ADICIONADA ---
+        // Verifica se a disciplina está sendo usada em alguma matrícula
+        boolean emUso = false;
+        for (Disciplina disciplina : daoDisciplina.listarDisciplinas()) {
+            if (disciplina.getCurso() != null && disciplina.getCurso().getCodigoCurso() == selecionada.getCodigoCurso()) {
+                emUso = true;
+                break; // Encontrou uma matrícula, não precisa continuar procurando
+            }
+        }
+
+        // Se estiver em uso, impede a exclusão e avisa o usuário
+        if (emUso) {
+            mostrarAlerta("Exclusão não permitida", "Esta disciplina não pode ser excluída, pois existem alunos matriculados nela.", Alert.AlertType.ERROR);
+            return;
+        }
+        // --- FIM DA VERIFICAÇÃO ---
+
+
+        // Se não estiver em uso, a exclusão é realizada normalmente
+        daoCurso.excluirCurso(selecionada);
         carregarDados();
     }
 

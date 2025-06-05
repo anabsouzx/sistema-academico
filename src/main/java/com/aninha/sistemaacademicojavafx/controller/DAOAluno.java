@@ -48,6 +48,7 @@ public class DAOAluno {
         }
         return false; // Aluno não encontrado
     }
+
     public Aluno buscarPorCodigo(int codigo) {
         for (Aluno a : alunos) {
             if (a.getCodigoAluno() == codigo) {
@@ -57,4 +58,7 @@ public class DAOAluno {
         return null;
     }
 
+    public boolean excluirAluno(Aluno aluno){
+        return alunos.remove(aluno);
+    }
 }

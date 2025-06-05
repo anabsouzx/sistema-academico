@@ -3,6 +3,7 @@ package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
 // Importações necessárias
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
+import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
@@ -94,17 +95,15 @@ public class GerenciarMatriculas implements Initializable {
     // Método chamado ao clicar no botão "Excluir"
     @FXML
     void excluirMatricula(ActionEvent event) {
-        // Pega a matrícula selecionada
-        Matricula matriculaSelecionada = tableMatriculas.getSelectionModel().getSelectedItem();
+        Matricula selecionada = tableMatriculas.getSelectionModel().getSelectedItem();
 
-        // Verifica se nada foi selecionado
-        if (matriculaSelecionada == null) {
-            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma matrícula para excluir.", Alert.AlertType.WARNING);
+        if (selecionada == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para excluir.", Alert.AlertType.WARNING);
             return;
         }
 
-        // Exclui a matrícula e atualiza a tabela
-        //daoMatricula.excluirMatricula(matriculaSelecionada);
+        // Se não estiver em uso, a exclusão é realizada normalmente
+        daoMatricula.excluirMatricula(selecionada);
         carregarDados();
     }
 
