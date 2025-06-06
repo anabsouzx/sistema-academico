@@ -139,11 +139,6 @@ public class GerenciarDisciplinas implements Initializable {
     public void carregarDados() {
         ObservableList<Disciplina> lista = daoDisciplina.listarDisciplinas();
         tableDisciplinas.setItems(lista);
-        if(lista.isEmpty()){
-            Curso c = new Curso("gostrofenofe", 8);
-            Disciplina d = new Disciplina("boquete parafuso",c,1);
-            daoDisciplina.adicionar(d);
-        }
         tableDisciplinas.refresh();
     }
 

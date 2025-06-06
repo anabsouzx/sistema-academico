@@ -142,10 +142,6 @@ public class GerenciarCursos implements Initializable {
     public void carregarDados() {
         ObservableList<Curso> listaDeCursos = daoCurso.listarCursos();
         tableCursos.setItems(listaDeCursos);
-        if(listaDeCursos.isEmpty()){
-            Curso c = new Curso("gostrofenofe", 8);
-            daoCurso.adicionar(c);
-        }
         tableCursos.refresh();
     }
 
