@@ -11,6 +11,11 @@
                 <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Editar Turma" />
             <ComboBox fx:id="cbNomeProfessor" prefWidth="150.0" />
             <ComboBox fx:id="cbNomeDisciplina" prefWidth="150.0" />
+
+                <Label text="Alunos da Turma:" />
+                <Label text="(Segure Ctrl/Cmd para selecionar múltiplos)" style="-fx-font-size: 10px;" />
+                <ListView fx:id="listViewAlunos" prefHeight="250.0" />
+
                 <Button mnemonicParsing="false" onAction="#salvarEdicao" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Salvar Alterações" />
                 <Button mnemonicParsing="false" onAction="#cancelarEdicao" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Cancelar" />
             </children>

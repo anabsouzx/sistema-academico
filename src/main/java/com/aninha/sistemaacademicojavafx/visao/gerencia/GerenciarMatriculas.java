@@ -44,7 +44,7 @@ public class GerenciarMatriculas implements Initializable {
     private TableColumn<Matricula, String> colunaCodA;
 
     @FXML
-    private TableColumn<Matricula, String> colunaCodDisc;
+    private TableColumn<Matricula, String> colunaCodCurso;
 
     @FXML
     private TableColumn<Matricula, Integer> colunaSemestre;
@@ -130,14 +130,14 @@ public class GerenciarMatriculas implements Initializable {
         });
 
         // Coluna para "Nome da Disciplina (ID: Y)"
-        colunaCodDisc.setCellValueFactory(cellDataFeatures -> {
+        colunaCodCurso.setCellValueFactory(cellDataFeatures -> {
             Matricula matricula = cellDataFeatures.getValue();
-            Disciplina disciplina = matricula.getDisciplina(); // Pega o objeto Disciplina diretamente
-            if (disciplina != null) {
+            Curso curso = matricula.getCurso(); // Pega o objeto Disciplina diretamente
+            if (curso != null) {
                 // Disciplina tem getNomeDisciplina() e getCodigoDisciplina()
-                return new SimpleStringProperty(disciplina.getNomeDisciplina() + " (ID: " + disciplina.getCodigoDisciplina() + ")");
+                return new SimpleStringProperty(curso.getNomeCurso() + " (ID: " + curso.getCodigoCurso() + ")");
             }
-            return new SimpleStringProperty("Disciplina não especificada");
+            return new SimpleStringProperty("Curso não especificada");
         });
 
         colunaSemestre.setCellValueFactory(new PropertyValueFactory<>("semestre"));

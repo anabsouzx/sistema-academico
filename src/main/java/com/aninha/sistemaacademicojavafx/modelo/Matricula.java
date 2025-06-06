@@ -3,6 +3,8 @@ package com.aninha.sistemaacademicojavafx.modelo; // Pacote onde a classe está 
 // Classe que representa uma matrícula de um aluno em uma disciplina
 public class Matricula {
 
+    private Curso curso;
+
     // Número único da matrícula
     private int numMatricula;
 
@@ -19,10 +21,10 @@ public class Matricula {
     private int ano;
 
     // Construtor - usado para criar um novo objeto Matricula com os dados fornecidos
-    public Matricula(int numMatricula, Aluno aluno, Disciplina disciplina, int semestre, int ano) {
+    public Matricula(int numMatricula, Aluno aluno, Curso curso, int semestre, int ano) {
         this.numMatricula = numMatricula;
         this.aluno = aluno;
-        this.disciplina = disciplina;
+        this.curso = curso;
         this.semestre = semestre;
         this.ano = ano;
     }
@@ -48,13 +50,13 @@ public class Matricula {
     }
 
     // Retorna a disciplina da matrícula
-    public Disciplina getDisciplina() {
-        return disciplina;
+    public Curso getCurso() {
+        return curso;
     }
 
     // Define (altera) a disciplina da matrícula
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
     // Retorna o semestre da matrícula

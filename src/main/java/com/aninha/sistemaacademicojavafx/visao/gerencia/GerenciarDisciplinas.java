@@ -1,9 +1,10 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia;
 
-import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
-import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
-import com.aninha.sistemaacademicojavafx.modelo.*;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
+import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
+import com.aninha.sistemaacademicojavafx.modelo.Curso;
+import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
+import com.aninha.sistemaacademicojavafx.modelo.Turma;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarDisciplina;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -21,7 +22,6 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class GerenciarDisciplinas implements Initializable {
@@ -44,33 +44,22 @@ public class GerenciarDisciplinas implements Initializable {
     @FXML
     private TableView<Disciplina> tableDisciplinas;
 
-    private DAODisciplina daoDisciplina;
-    private DAOMatricula daoMatricula;
-    private DAOTurma daoTurma;
-
     @FXML
     private ComboBox<Curso> comboCursos;
 
-
-    public GerenciarDisciplinas() {
-        this.daoDisciplina = new DAODisciplina();
-        this.daoMatricula = new DAOMatricula();
-        this.daoTurma = new DAOTurma();
-    }
+    private final DAODisciplina daoDisciplina = new DAODisciplina();
+    private final DAOTurma daoTurma = new DAOTurma();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Mapeamento das colunas com os atributos da classe Disciplina
         colunaCodigoD.setCellValueFactory(new PropertyValueFactory<>("codigoDisciplina"));
         colunaNomeD.setCellValueFactory(new PropertyValueFactory<>("nomeDisciplina"));
         colunaCargaH.setCellValueFactory(new PropertyValueFactory<>("cargaHoraria"));
 
-        // coluna codigo curso
         colunaCodigoC.setCellValueFactory(cellDataFeatures -> {
             Disciplina disciplina = cellDataFeatures.getValue();
-            Curso curso = disciplina.getCurso(); // Pega o objeto Disciplina diretamente
+            Curso curso = disciplina.getCurso();
             if (curso != null) {
-                // Disciplina tem getNomeDisciplina() e getCodigoDisciplina()
                 return new SimpleStringProperty(curso.getNomeCurso() + " (ID: " + curso.getCodigoCurso() + ")");
             }
             return new SimpleStringProperty("Curso não especificado");
@@ -87,51 +76,35 @@ public class GerenciarDisciplinas implements Initializable {
     @FXML
     void editarDisciplina(ActionEvent event) {
         Disciplina selecionada = tableDisciplinas.getSelectionModel().getSelectedItem();
-
         if (selecionada == null) {
             mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para editar.", Alert.AlertType.WARNING);
             return;
         }
-
         abrirTelaEditarDisciplina(selecionada);
     }
-
 
     @FXML
     void excluirDisciplina(ActionEvent event) {
         Disciplina selecionada = tableDisciplinas.getSelectionModel().getSelectedItem();
-
         if (selecionada == null) {
             mostrarAlerta("Seleção Necessária", "Por favor, selecione uma disciplina para excluir.", Alert.AlertType.WARNING);
             return;
         }
 
-        // Verifica se a disciplina está sendo usada em alguma matrícula
         boolean emUso = false;
-        for (Matricula matricula : daoMatricula.listarMatriculas()) {
-            if (matricula.getDisciplina() != null && matricula.getDisciplina().getCodigoDisciplina() == selecionada.getCodigoDisciplina()) {
-                emUso = true;
-                break; // Encontrou uma matrícula, não precisa continuar procurando
-            }
-        }
-
-        // verifica se a disciplina esta sendo usada em alguma turma
         for (Turma turma : daoTurma.listarTurmas()) {
-            if (turma.getDisciplina() != null && turma.getDisciplina().getCodigoDisciplina() == selecionada.getCodigoDisciplina()) {
+            if (turma.getDisciplina() != null &&
+                    turma.getDisciplina().getCodigoDisciplina() == selecionada.getCodigoDisciplina()) {
                 emUso = true;
-                break; // Encontrou uma turma, não precisa continuar procurando
+                break;
             }
         }
 
-        // Se estiver em uso, impede a exclusão e avisa o usuário
         if (emUso) {
-            mostrarAlerta("Exclusão não permitida", "Esta disciplina não pode ser excluída, pois existem alunos matriculados nela.", Alert.AlertType.ERROR);
+            mostrarAlerta("Exclusão não permitida", "Esta disciplina não pode ser excluída, pois está associada a uma turma.", Alert.AlertType.ERROR);
             return;
         }
-        // --- FIM DA VERIFICAÇÃO ---
 
-
-        // Se não estiver em uso, a exclusão é realizada normalmente
         daoDisciplina.excluirDisciplina(selecionada);
         carregarDados();
     }
@@ -158,6 +131,7 @@ public class GerenciarDisciplinas implements Initializable {
         alert.setHeaderText(cabecalho);
         alert.showAndWait();
     }
+
     public void abrirTelaEditarDisciplina(Disciplina disciplinaSelecionada) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/aninha/sistemaacademicojavafx/visao/gerencia/edit/editar-disciplina.fxml"));
@@ -167,14 +141,12 @@ public class GerenciarDisciplinas implements Initializable {
             editarDisciplinaController.setDisciplinaParaEditar(disciplinaSelecionada, this);
 
             exibirNoPainelCentral(root);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public void exibirNoPainelCentral(Parent tela) {
         painelPrincipal.setCenter(tela);
     }
-
-
 }

@@ -18,8 +18,8 @@
                     </VBox.margin>
                 </Label>
             <ComboBox fx:id="comboBoxAluno" prefWidth="150.0" />
-                <Label text="Código da Disciplina" />
-            <ComboBox fx:id="comboBoxDisc" prefWidth="150.0" />
+                <Label text="escolha o Curso" />
+            <ComboBox fx:id="comboBoxCurso" prefWidth="150.0" />
                 <Label text="Semestre" />
                 <TextField fx:id="txtSemestre" promptText="2" />
                 <Label text="Ano" />

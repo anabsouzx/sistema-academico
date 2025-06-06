@@ -65,8 +65,8 @@ public class InserirCurso {
             // Feedback para o utilizador
             Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
             sucesso.setTitle("Sucesso");
-            sucesso.setHeaderText("Aluno inserido");
-            sucesso.setContentText("O aluno " + nome + " foi inserido com sucesso!");
+            sucesso.setHeaderText("Curso inserido");
+            sucesso.setContentText("O Curso " + nome + " foi inserido com sucesso!");
             sucesso.showAndWait();
 
             txtNomeC.setText("");
@@ -76,7 +76,7 @@ public class InserirCurso {
             e.printStackTrace();
             Alert erro = new Alert(Alert.AlertType.ERROR);
             erro.setTitle("Erro");
-            erro.setHeaderText("Erro ao inserir aluno");
+            erro.setHeaderText("Erro ao inserir Curso");
             erro.setContentText("Ocorreu um erro inesperado: " + e.getMessage());
             erro.showAndWait();
         }

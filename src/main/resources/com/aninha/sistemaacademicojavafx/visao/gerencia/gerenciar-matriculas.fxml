@@ -23,7 +23,7 @@
             <columns>
                 <TableColumn fx:id="colunaNumero" prefWidth="100.0" text="Nº Matrícula" />
                 <TableColumn fx:id="colunaCodA" prefWidth="200.0" text="Aluno" />
-                <TableColumn fx:id="colunaCodDisc" prefWidth="200.0" text="Disciplina" />
+                <TableColumn fx:id="colunaCodCurso" prefWidth="200.0" text="Curso" />
                 <TableColumn fx:id="colunaSemestre" prefWidth="250.0" text="Semestre" />
                 <TableColumn fx:id="colunaAno" prefWidth="250.0" text="Ano" />
             </columns>

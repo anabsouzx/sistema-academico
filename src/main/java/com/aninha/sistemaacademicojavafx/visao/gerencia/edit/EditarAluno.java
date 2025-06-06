@@ -114,7 +114,7 @@ public class EditarAluno {
         }
     }
 
-    // Método chamado quando o botão "Cancelar" é clicado
+    // Metodo chamado quando o botão "Cancelar" é clicado
     @FXML
     void cancelarAction(ActionEvent event) {
         fecharTelaDeEdicao(); // Fecha a tela de edição

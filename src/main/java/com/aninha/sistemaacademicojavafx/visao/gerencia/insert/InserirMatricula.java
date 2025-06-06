@@ -2,10 +2,12 @@ package com.aninha.sistemaacademicojavafx.visao.gerencia.insert;
 
 import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
+import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import com.aninha.sistemaacademicojavafx.controller.DAOMatricula;
 import com.aninha.sistemaacademicojavafx.controller.DAOAluno;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
+import com.aninha.sistemaacademicojavafx.controller.DAOCurso;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,33 +31,38 @@ public class InserirMatricula implements Initializable {
     @FXML
     private ComboBox<Aluno> comboBoxAluno;
 
-    @FXML
-    private ComboBox<Disciplina> comboBoxDisc;
+    //@FXML
+    //private ComboBox<Disciplina> comboBoxDisc;
 
     @FXML
     private TextField txtSemestre;
 
+    @FXML
+    private ComboBox<Curso> comboBoxCurso;
 
 
     private DAOMatricula daoMatricula;
     private DAOAluno daoAluno;
     private DAODisciplina daoDisciplina;
+    private DAOCurso daoCurso;
 
     public InserirMatricula(){
         this.daoMatricula = new DAOMatricula();
         this.daoAluno = new DAOAluno();
         this.daoDisciplina = new DAODisciplina();
+        this.daoCurso = new DAOCurso();
     }
 
     @FXML
     void insereMatricula(ActionEvent event) {
         int num=0;
         Aluno alunoSelecionado = comboBoxAluno.getSelectionModel().getSelectedItem();
-        Disciplina disciplinaSelecionada = comboBoxDisc.getSelectionModel().getSelectedItem();
+        //Disciplina disciplinaSelecionada = comboBoxDisc.getSelectionModel().getSelectedItem();
+        Curso cursoSelecionado = comboBoxCurso.getSelectionModel().getSelectedItem();
         String smtStr = txtSemestre.getText();
         String anoStr = txtAno.getText();
 
-        if(alunoSelecionado==null || disciplinaSelecionada==null || smtStr.isEmpty() || anoStr.isEmpty()){
+        if(alunoSelecionado==null || cursoSelecionado==null || smtStr.isEmpty() || anoStr.isEmpty()){
             // mensagem de erro aqui pq nao quero fazer
         }
 
@@ -70,7 +77,7 @@ public class InserirMatricula implements Initializable {
             return;
         }
 
-        Matricula matricula = new Matricula(num,alunoSelecionado,disciplinaSelecionada,smt,ano);
+        Matricula matricula = new Matricula(num,alunoSelecionado,cursoSelecionado,smt,ano);
 
         try {
             daoMatricula.adicionar(matricula); // O DAO agora lida com a lista
@@ -85,7 +92,7 @@ public class InserirMatricula implements Initializable {
             txtSemestre.setText("");
             txtAno.setText("");
             comboBoxAluno.setItems(null);
-            comboBoxDisc.setItems(null);
+            comboBoxCurso.setItems(null);
             txtSemestre.requestFocus(); // Foco no primeiro campo para nova inserção
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,7 +108,7 @@ public class InserirMatricula implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         popularComboBoxAlunos();
-        popularComboBoxDisc();
+        popularComboBoxCurso();
 
     }
 
@@ -128,7 +135,7 @@ public class InserirMatricula implements Initializable {
         });
     }
 
-    private void popularComboBoxDisc() {
+    /*private void popularComboBoxDisc() {
         ObservableList<Disciplina> disciplinas = daoDisciplina.listarDisciplinasComboBox();
         comboBoxDisc.setItems(disciplinas);
 
@@ -149,5 +156,30 @@ public class InserirMatricula implements Initializable {
                         .orElse(null);
             }
         });
+    }*/
+    private void popularComboBoxCurso() {
+        ObservableList<Curso> cursos = daoCurso.listarCursosComboBox();
+        comboBoxCurso.setItems(cursos);
+
+        comboBoxCurso.setConverter(new StringConverter<Curso>() {
+            @Override
+            public String toString(Curso curso) {
+                return (curso == null) ? "" : curso.getNomeCurso() + " (ID: " + curso.getCodigoCurso() + ")";
+            }
+
+            @Override
+            public Curso fromString(String string) {
+                if (string == null || string.isEmpty()) return null;
+
+                for (Curso c : comboBoxCurso.getItems()) {
+                    String display = c.getNomeCurso() + " (ID: " + c.getCodigoCurso() + ")";
+                    if (display.equals(string)) {
+                        return c;
+                    }
+                }
+                return null;
+            }
+        });
     }
+
 }
