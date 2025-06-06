@@ -1,5 +1,6 @@
 package com.aninha.sistemaacademicojavafx.visao.gerencia.edit;
 
+import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Curso;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.controller.DAODisciplina;
@@ -22,6 +23,7 @@ public class EditarDisciplina {
 
     @FXML
     private ComboBox<Curso> comboCursos;
+
 
     private Disciplina disciplinaParaEditar;
     private GerenciarDisciplinas controllerGerenciador;

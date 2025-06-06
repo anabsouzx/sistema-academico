@@ -35,6 +35,8 @@ public class InserirMatricula implements Initializable {
     @FXML
     private TextField txtSemestre;
 
+
+
     private DAOMatricula daoMatricula;
     private DAOAluno daoAluno;
     private DAODisciplina daoDisciplina;
@@ -100,6 +102,7 @@ public class InserirMatricula implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         popularComboBoxAlunos();
         popularComboBoxDisc();
+
     }
 
     private void popularComboBoxAlunos() {

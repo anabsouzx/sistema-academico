@@ -16,21 +16,27 @@ public class Aluno extends Pessoa {
         super(nome, dataDeNascimento, cpf, telefone);
     }
 
-    // Método para obter o código do aluno (getter)
+    // Metodo para obter o código do aluno (getter)
     public int getCodigoAluno() {
         return codigoAluno;
     }
 
-    // Método para definir o código do aluno (setter)
+    // Metodo para definir o código do aluno (setter)
     public void setCodigoAluno(int codigoAluno) {
         this.codigoAluno = codigoAluno;
     }
 
-    // Sobrescreve o método 'info()' herdado da classe Pessoa
-    // Esse método retorna uma string com o nome do aluno e seu código
+    // Sobrescreve o metodo 'info()' herdado da classe Pessoa
+    // Esse metodo retorna uma string com o nome do aluno e seu código
     @Override
     public String info() {
         return getNome() + " (ID: " + getCodigoAluno() + ")";
     }
+
+    @Override
+    public String toString() {
+        return this.getNome(); // ou outro campo relevante
+    }
+
 }
 

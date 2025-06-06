@@ -7,9 +7,11 @@ import com.aninha.sistemaacademicojavafx.modelo.Aluno;
 import com.aninha.sistemaacademicojavafx.modelo.Disciplina;
 import com.aninha.sistemaacademicojavafx.modelo.Matricula;
 import com.aninha.sistemaacademicojavafx.visao.gerencia.GerenciarMatriculas;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class EditarMatricula {
@@ -25,6 +27,13 @@ public class EditarMatricula {
     @FXML
     private TextField campoAno;
 
+    @FXML
+    private ComboBox<Aluno> comboAluno;
+
+    @FXML
+    private ComboBox<Disciplina> comboDisciplina;
+
+
     private Matricula matricula;
     private GerenciarMatriculas controllerPai;
 
@@ -36,53 +45,50 @@ public class EditarMatricula {
         this.matricula = matricula;
         this.controllerPai = controllerPai;
 
-        campoCodAluno.setText(String.valueOf(matricula.getAluno().getCodigoAluno()));
-        campoCodDisciplina.setText(String.valueOf(matricula.getDisciplina().getCodigoDisciplina()));
         campoSemestre.setText(String.valueOf(matricula.getSemestre()));
         campoAno.setText(String.valueOf(matricula.getAno()));
+
+        comboAluno.setItems(FXCollections.observableArrayList(daoAluno.listarAlunos()));
+        comboDisciplina.setItems(FXCollections.observableArrayList(daoDisciplina.listarDisciplinas()));
+
+        comboAluno.setValue(matricula.getAluno());
+        comboDisciplina.setValue(matricula.getDisciplina());
     }
+
 
     @FXML
     void salvarAlteracoesAction(ActionEvent event) {
-        String codAlunoStr = campoCodAluno.getText();
-        String codDisciplinaStr = campoCodDisciplina.getText();
-        String semestre = campoSemestre.getText();
+        String semestreStr = campoSemestre.getText();
         String anoStr = campoAno.getText();
 
-        if (codAlunoStr.isEmpty() || codDisciplinaStr.isEmpty() || semestre.isEmpty() || anoStr.isEmpty()) {
-            mostrarAlerta("Campos vazios", "Preencha todos os campos.", Alert.AlertType.WARNING);
+        Aluno aluno = comboAluno.getValue();
+        Disciplina disciplina = comboDisciplina.getValue();
+
+        if (aluno == null || disciplina == null || semestreStr.isEmpty() || anoStr.isEmpty()) {
+            mostrarAlerta("Campos vazios", "Preencha todos os campos e selecione Aluno e Disciplina.", Alert.AlertType.WARNING);
             return;
         }
 
-        int codAluno, codDisciplina, ano;
+        int semestre, ano;
         try {
-            codAluno = Integer.parseInt(codAlunoStr);
-            codDisciplina = Integer.parseInt(codDisciplinaStr);
+            semestre = Integer.parseInt(semestreStr);
             ano = Integer.parseInt(anoStr);
         } catch (NumberFormatException e) {
-            mostrarAlerta("Erro de formato", "Código e ano devem ser números inteiros.", Alert.AlertType.ERROR);
-            return;
-        }
-
-        Aluno aluno = daoAluno.buscarPorCodigo(codAluno);
-        Disciplina disciplina = daoDisciplina.buscarPorCodigo(codDisciplina);
-
-        if (aluno == null || disciplina == null) {
-            mostrarAlerta("Erro", "Aluno ou Disciplina não encontrados.", Alert.AlertType.ERROR);
+            mostrarAlerta("Erro de formato", "Semestre e ano devem ser números inteiros.", Alert.AlertType.ERROR);
             return;
         }
 
         // Atualiza a matrícula
         matricula.setAluno(aluno);
         matricula.setDisciplina(disciplina);
-        matricula.setSemestre(Integer.parseInt(campoSemestre.getText()));
+        matricula.setSemestre(semestre);
         matricula.setAno(ano);
 
-        // Não há necessidade de atualizar em DAO, pois lista é a mesma referência
         mostrarAlerta("Sucesso", "Matrícula atualizada com sucesso!", Alert.AlertType.INFORMATION);
         controllerPai.carregarDados();
         fecharTela();
     }
+
 
     @FXML
     void cancelarAction(ActionEvent event) {
