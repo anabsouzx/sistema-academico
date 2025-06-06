@@ -40,6 +40,7 @@ public class EditarProfessor {
         popularCampos();
     }
 
+
     private void popularCampos() {
         if (professorParaEditar != null) {
             txtNomeA.setText(professorParaEditar.getNome());
@@ -82,7 +83,7 @@ public class EditarProfessor {
 
         // Tenta atualizar o aluno usando o DAO
         if (daoProfessor.atualizarProfessor(professorParaEditar)) {
-            mostrarAlerta("Sucesso", "Aluno atualizado com sucesso!", Alert.AlertType.INFORMATION);
+            mostrarAlerta("Sucesso", "Professor atualizado com sucesso!", Alert.AlertType.INFORMATION);
             if (controllerGerenciador != null) {
                 controllerGerenciador.carregarDados(); // Atualiza a tabela na tela principal
             }

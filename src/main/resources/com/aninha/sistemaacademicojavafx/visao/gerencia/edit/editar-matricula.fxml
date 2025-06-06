@@ -7,13 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarMatricula">
     <children>
         <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" spacing="15.0">
             <children>
                 <Label text="Editar Matricula" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                <TextField fx:id="campoCodAluno" promptText="Nome Completo" />
-                <TextField fx:id="campoCodDisciplina" promptText="Data de Nascimento (dd/MM/yyyy)" />
+                <ComboBox fx:id="comboAluno" promptText="Selecione o Aluno" prefWidth="250.0"/>
+                <ComboBox fx:id="comboDisciplina" promptText="Selecione a Disciplina" prefWidth="250.0"/>
                 <TextField fx:id="campoSemestre" promptText="Telefone" />
                 <TextField fx:id="campoAno" promptText="CPF" />
                 <Button mnemonicParsing="false" onAction="#salvarAlteracoesAction" text="Salvar Alterações" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>

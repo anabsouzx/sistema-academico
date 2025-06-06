@@ -44,4 +44,10 @@ public class Disciplina {
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
+
+    @Override
+    public String toString() {
+        return this.getNomeDisciplina(); // ou this.getNomeDisciplina()
+    }
+
 }

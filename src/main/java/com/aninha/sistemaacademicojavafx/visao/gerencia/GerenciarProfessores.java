@@ -4,6 +4,7 @@ import com.aninha.sistemaacademicojavafx.controller.DAOTurma;
 import com.aninha.sistemaacademicojavafx.modelo.Professor;
 import com.aninha.sistemaacademicojavafx.controller.DAOProfessor;
 import com.aninha.sistemaacademicojavafx.modelo.Turma;
+import com.aninha.sistemaacademicojavafx.visao.gerencia.edit.EditarProfessor;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,9 +45,27 @@ public class GerenciarProfessores implements Initializable {
     private TableView<Professor> tableProfessores;
 
     @FXML
-    void editarProf(ActionEvent event) throws IOException{
-        carregarTela("edit/editar-professor.fxml");
+    void editarProf(ActionEvent event) throws IOException {
+        Professor selecionado = tableProfessores.getSelectionModel().getSelectedItem();
+
+        if (selecionado == null) {
+            mostrarAlerta("Seleção Necessária", "Por favor, selecione um professor para editar.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edit/editar-professor.fxml"));
+        Parent contentDaTela = fxmlLoader.load();
+
+        // Recupera o controller da tela de edição
+        EditarProfessor controller = fxmlLoader.getController();
+
+        // Passa o professor selecionado e o próprio controller de gerenciamento
+        controller.setProfessorParaEditar(selecionado, this);
+
+        // Exibe a tela de edição
+        painelPrincipal.setCenter(contentDaTela);
     }
+
 
     @FXML
     void excluirProf(ActionEvent event) throws IOException{

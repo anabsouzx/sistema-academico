@@ -92,7 +92,7 @@ public class GerenciarMatriculas implements Initializable {
         }
     }
 
-    // Método chamado ao clicar no botão "Excluir"
+    // Metodo chamado ao clicar no botão "Excluir"
     @FXML
     void excluirMatricula(ActionEvent event) {
         Matricula selecionada = tableMatriculas.getSelectionModel().getSelectedItem();
@@ -107,7 +107,7 @@ public class GerenciarMatriculas implements Initializable {
         carregarDados();
     }
 
-    // Método chamado ao clicar em "Inserir nova matrícula"
+    // Metodo chamado ao clicar em "Inserir nova matrícula"
     @FXML
     void inserirMatricula(ActionEvent event) throws IOException {
         carregarTela("insert/inserir-matricula.fxml");
